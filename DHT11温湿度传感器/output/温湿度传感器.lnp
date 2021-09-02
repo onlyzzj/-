@@ -1,0 +1,7 @@
+".\output\main.obj",
+".\output\lcd1602.obj",
+".\output\delay.obj",
+".\output\wenshidu.obj",
+".\output\math.obj" 
+TO ".\output\温湿度传感器" 
+PRINT(".\list\温湿度传感器.m51") RAMSIZE(256) 

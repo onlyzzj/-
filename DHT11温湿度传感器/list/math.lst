@@ -1,0 +1,42 @@
+C51 COMPILER V9.54   MATH                                                                  04/11/2016 20:34:39 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE MATH
+OBJECT MODULE PLACED IN .\output\math.obj
+COMPILER INVOKED BY: D:\Keil_v5\C51\BIN\C51.EXE math.c BROWSE DEBUG OBJECTEXTEND PRINT(.\list\math.lst) TABS(2) OBJECT(.
+                    -\output\math.obj)
+
+line level    source
+
+   1          #include "math.h"
+   2          
+   3          
+   4          //二进制数转化为十进制数
+   5          uchar math(uchar a)
+   6          {
+   7   1        uchar num=0,i;
+   8   1        uint j=1;
+   9   1        for(i=0;i<8;i++)
+  10   1        {
+  11   2          num+=(a&0x01)*j;
+  12   2          a>>=1;
+  13   2          j*=2;
+  14   2        }
+  15   1        return num;
+  16   1      }
+  17          
+  18          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     36    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

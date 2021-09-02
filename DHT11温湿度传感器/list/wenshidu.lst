@@ -1,0 +1,116 @@
+C51 COMPILER V9.54   WENSHIDU                                                              04/11/2016 20:34:39 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE WENSHIDU
+OBJECT MODULE PLACED IN .\output\wenshidu.obj
+COMPILER INVOKED BY: D:\Keil_v5\C51\BIN\C51.EXE wenshidu.c BROWSE DEBUG OBJECTEXTEND PRINT(.\list\wenshidu.lst) TABS(2) 
+                    -OBJECT(.\output\wenshidu.obj)
+
+line level    source
+
+   1          #include "wenshidu.h"
+   2          #include "delay.h"
+   3          
+   4          
+   5          
+   6          uchar comdata=0,flag,temp,RH_data_H_temp,RH_data_L_temp,T_data_H_temp,T_data_L_temp,check_data,check_data_
+             -temp,RH_data_H,RH_data_L,T_data_H,T_data_L;
+   7          
+   8          
+   9          
+  10          
+  11          void com(void)
+  12          {
+  13   1        uchar i;
+  14   1        for(i=0;i<8;i++)     
+  15   1        {
+  16   2          //每一bit数据都以50us低电平时隙开始
+  17   2          flag=2; 
+  18   2          while((!P2_0)&&flag++);//P2_0=1或flag自增到0时退出该循环
+  19   2          delay10us();
+  20   2          delay10us();
+  21   2          delay10us();
+  22   2          temp=0;      //高电平保持26~28us表示数据“0”
+  23   2          if(P2_0)
+  24   2          {
+  25   3            temp=1;    //高电平保持70us表示数据“1”
+  26   3          }
+  27   2          flag=2;
+  28   2          while((P2_0)&&flag++);//P2_0=0或flag自增到0时退出该循环   
+  29   2          if(flag==1)
+  30   2          {
+  31   3            break;//超时则跳出for循环 
+  32   3          }
+  33   2          comdata<<=1;
+  34   2          comdata|=temp;  
+  35   2        }
+  36   1      }
+  37          
+  38          
+  39          
+  40          
+  41          //湿度整数数据：RH_data_H
+  42          //湿度小数数据：RH_data_L
+  43          //温度整数数据：T_data_H
+  44          //温度小数数据：T_data_L
+  45          //校验和：check_data
+  46          void wenshidu(void)
+  47          {
+  48   1        //主机把总线拉低至少18ms(开始信号)，保证DHT11能检测到开始信号
+  49   1        P2_0=0;
+  50   1        delayms(20);
+  51   1        //主机发送开始信号结束后，延时等待20~40us后，读取DHT11的响应信号
+  52   1        P2_0=1;
+  53   1        delay10us();
+C51 COMPILER V9.54   WENSHIDU                                                              04/11/2016 20:34:39 PAGE 2   
+
+  54   1        delay10us();
+  55   1        delay10us();
+  56   1        delay10us();
+  57   1        //主机发送开始信号结束后,可以切换到输入模式，或者输出高电平均可，总线由上拉电阻拉高
+  58   1        P2_0=1; 
+  59   1        //DHT11接到主机的开始信号后，等待主机开始信号结束后，然后发送80us低电平响应信号     
+  60   1        if(!P2_0) 
+  61   1        {
+  62   2          //判断从机发出80us的低电平响应信号是否结束  
+  63   2          flag=2; 
+  64   2          while((!P2_0)&&flag++);//P2_0=1或flag自增到0时退出该循环
+  65   2          //DHT11发送响应信号后，再把总线拉高80us，准备发送数据
+  66   2          flag=2;
+  67   2          while((P2_0)&&flag++);//P2_0=0或flag自增到0时退出该循环   
+  68   2          //数据发送        
+  69   2          com();
+  70   2          RH_data_H_temp=comdata;
+  71   2          com();
+  72   2          RH_data_L_temp=comdata;
+  73   2          com();
+  74   2          T_data_H_temp=comdata;
+  75   2          com();
+  76   2          T_data_L_temp=comdata;
+  77   2          com();
+  78   2          check_data=comdata;
+  79   2          P2_0=1;//DHT11拉低总线50us,随后总线由上拉电阻拉高进入空闲状态
+  80   2          check_data_temp=(RH_data_H_temp+RH_data_L_temp+T_data_H_temp+T_data_L_temp);//数据校验 
+  81   2          if(check_data==check_data_temp)
+  82   2          {
+  83   3            RH_data_H=RH_data_H_temp;
+  84   3            RH_data_L=RH_data_L_temp;
+  85   3            T_data_H=T_data_H_temp;
+  86   3            T_data_L=T_data_L_temp;
+  87   3          }
+  88   2        }
+  89   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    185    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     13       1
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
