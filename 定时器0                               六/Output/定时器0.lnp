@@ -1,0 +1,6 @@
+".\Output\main.obj",
+".\Output\delay.obj",
+".\Output\led.obj",
+".\Output\key.obj" 
+TO ".\Output\定时器0" 
+PRINT(".\List\定时器0.m51") RAMSIZE(256) 

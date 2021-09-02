@@ -1,0 +1,590 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        01/30/2018  18:09:19  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+D:\KEIL_V5\C51\BIN\BL51.EXE .\Output\main.obj, .\Output\delay.obj, .\Output\led.obj, .\Output\key.obj TO .\Output\定时器
+>> 0 PRINT (.\List\定时器0.m51) RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  .\Output\main.obj (MAIN)
+  .\Output\delay.obj (DELAY)
+  .\Output\led.obj (LED)
+  .\Output\key.obj (KEY)
+  D:\KEIL_V5\C51\LIB\C51S.LIB (?C_STARTUP)
+  D:\KEIL_V5\C51\LIB\C51S.LIB (?C?UIDIV)
+  D:\KEIL_V5\C51\LIB\C51S.LIB (?C_INIT)
+
+
+LINK MAP OF MODULE:  .\Output\定时器0 (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0004H     UNIT         ?DT?MAIN
+            DATA    000CH     0004H     UNIT         ?DT?LED
+            DATA    0010H     0003H     UNIT         ?DT?_SHUMAGUAN__DTX?LED
+            DATA    0013H     0003H     UNIT         _DATA_GROUP_
+            DATA    0016H     0002H     UNIT         ?DT?LIUSHUIDENG2?LED
+            DATA    0018H     0001H     UNIT         ?DT?KEY
+                    0019H     0007H                  *** GAP ***
+            BIT     0020H.0   0000H.1   UNIT         ?BI?KEY
+                    0020H.1   0000H.7                *** GAP ***
+            IDATA   0021H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0003H     UNIT         ?PR?DIYIGELIANG?LED
+                    0006H     0005H                  *** GAP ***
+            CODE    000BH     0003H     ABSOLUTE     
+            CODE    000EH     009FH     UNIT         ?PR?KEY?KEY
+            CODE    00ADH     009BH     UNIT         ?PR?_SHUMAGUAN__DTX?LED
+            CODE    0148H     008CH     UNIT         ?C_C51STARTUP
+            CODE    01D4H     0076H     UNIT         ?PR?_MIAOBIAO?LED
+            CODE    024AH     0058H     UNIT         ?PR?SHUMAGUAN__DT?LED
+            CODE    02A2H     0055H     UNIT         ?C?LIB_CODE
+            CODE    02F7H     003EH     UNIT         ?PR?LIUSHUIDENG2?LED
+            CODE    0335H     003AH     UNIT         ?PR?TIMER0?MAIN
+            CODE    036FH     002DH     UNIT         ?PR?SHANSHUO1?LED
+            CODE    039CH     002DH     UNIT         ?PR?SHANSHUO3?LED
+            CODE    03C9H     002DH     UNIT         ?PR?LIUSHUIDENG1?LED
+            CODE    03F6H     002BH     UNIT         ?PR?SHANSHUO2?LED
+            CODE    0421H     001EH     UNIT         ?PR?_DELAYMS?DELAY
+            CODE    043FH     0012H     UNIT         ?PR?SHANSHUO4?LED
+            CODE    0451H     0010H     UNIT         ?PR?INIT_TIMER0_MS1?MAIN
+            CODE    0461H     0010H     UNIT         ?PR?INIT_TIMER0_MS2?MAIN
+BL51 BANKED LINKER/LOCATER V6.22                                                      01/30/2018  18:09:19  PAGE 2
+
+
+            CODE    0471H     0010H     UNIT         ?C_INITSEG
+            CODE    0481H     0010H     UNIT         ?PR?SHUMAGUAN__JT?LED
+            CODE    0491H     000FH     UNIT         ?PR?MAIN?MAIN
+            CODE    04A0H     000AH     UNIT         ?CO?LED
+
+
+
+OVERLAY MAP OF MODULE:   .\Output\定时器0 (MAIN)
+
+
+SEGMENT                            DATA_GROUP 
+  +--> CALLED SEGMENT            START    LENGTH
+------------------------------------------------
+?C_C51STARTUP                    -----    -----
+  +--> ?PR?MAIN?MAIN
+  +--> ?C_INITSEG
+
+?PR?MAIN?MAIN                    -----    -----
+  +--> ?PR?INIT_TIMER0_MS2?MAIN
+  +--> ?PR?KEY?KEY
+  +--> ?PR?_MIAOBIAO?LED
+
+?PR?KEY?KEY                      -----    -----
+  +--> ?PR?_DELAYMS?DELAY
+
+?PR?_MIAOBIAO?LED                0013H    0003H
+  +--> ?CO?LED
+  +--> ?PR?_DELAYMS?DELAY
+
+
+
+SYMBOL TABLE OF MODULE:  .\Output\定时器0 (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  B:00A8H.7       PUBLIC        EA
+  D:00A8H         PUBLIC        IE
+  D:00B8H         PUBLIC        IP
+  C:0491H         PUBLIC        main
+  D:0008H         PUBLIC        miao
+  D:0098H         PUBLIC        SCON
+  D:0089H         PUBLIC        TMOD
+  D:0088H         PUBLIC        TCON
+  D:0009H         PUBLIC        fen
+  B:00A8H.1       PUBLIC        ET0
+  D:008CH         PUBLIC        TH0
+  D:008AH         PUBLIC        TL0
+  D:000AH         PUBLIC        num
+  C:0335H         PUBLIC        timer0
+  B:0088H.4       PUBLIC        TR0
+BL51 BANKED LINKER/LOCATER V6.22                                                      01/30/2018  18:09:19  PAGE 3
+
+
+  C:0451H         PUBLIC        init_timer0_ms1
+  C:0461H         PUBLIC        init_timer0_ms2
+  D:00C8H         PUBLIC        T2CON
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          INIT_TIMER0_MS1
+  C:0451H         LINE#         10
+  C:0451H         LINE#         11
+  C:0451H         LINE#         12
+  C:0454H         LINE#         13
+  C:0457H         LINE#         14
+  C:045AH         LINE#         15
+  C:045CH         LINE#         16
+  C:045EH         LINE#         17
+  C:0460H         LINE#         18
+  -------         ENDPROC       INIT_TIMER0_MS1
+  -------         PROC          INIT_TIMER0_MS2
+  C:0461H         LINE#         21
+  C:0461H         LINE#         22
+  C:0461H         LINE#         23
+  C:0464H         LINE#         24
+  C:0467H         LINE#         25
+  C:046AH         LINE#         26
+  C:046CH         LINE#         27
+  C:046EH         LINE#         28
+  C:0470H         LINE#         29
+  -------         ENDPROC       INIT_TIMER0_MS2
+  -------         PROC          MAIN
+  C:0491H         LINE#         31
+  C:0491H         LINE#         32
+  C:0491H         LINE#         34
+  C:0494H         LINE#         35
+  C:0494H         LINE#         36
+  C:0494H         LINE#         37
+  C:0497H         LINE#         38
+  C:049EH         LINE#         39
+  -------         ENDPROC       MAIN
+  -------         PROC          TIMER0
+  C:0335H         LINE#         58
+  C:0339H         LINE#         60
+  C:0341H         LINE#         61
+  C:034AH         LINE#         62
+  C:034AH         LINE#         63
+  C:0350H         LINE#         64
+  C:0352H         LINE#         65
+  C:035AH         LINE#         66
+  C:035AH         LINE#         67
+  C:035DH         LINE#         68
+  C:035FH         LINE#         69
+  C:0367H         LINE#         70
+  C:0367H         LINE#         71
+  C:036AH         LINE#         72
+  C:036AH         LINE#         73
+  C:036AH         LINE#         74
+  C:036AH         LINE#         75
+  -------         ENDPROC       TIMER0
+  -------         ENDMOD        MAIN
+
+BL51 BANKED LINKER/LOCATER V6.22                                                      01/30/2018  18:09:19  PAGE 4
+
+
+  -------         MODULE        DELAY
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00B0H         PUBLIC        P3
+  D:00A8H         PUBLIC        IE
+  D:00B8H         PUBLIC        IP
+  D:0098H         PUBLIC        SCON
+  D:0088H         PUBLIC        TCON
+  D:00C8H         PUBLIC        T2CON
+  C:0421H         PUBLIC        _delayms
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          _DELAYMS
+  D:0006H         SYMBOL        xms
+  -------         DO            
+  D:0006H         SYMBOL        i
+  D:0004H         SYMBOL        j
+  -------         ENDDO         
+  C:0421H         LINE#         2
+  C:0421H         LINE#         3
+  C:0421H         LINE#         5
+  C:042AH         LINE#         6
+  C:043EH         LINE#         7
+  -------         ENDPROC       _DELAYMS
+  -------         ENDMOD        DELAY
+
+  -------         MODULE        LED
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  C:0003H         PUBLIC        diyigeliang
+  D:00A8H         PUBLIC        IE
+  D:00B8H         PUBLIC        IP
+  C:036FH         PUBLIC        shanshuo1
+  C:03F6H         PUBLIC        shanshuo2
+  C:039CH         PUBLIC        shanshuo3
+  C:043FH         PUBLIC        shanshuo4
+  D:0098H         PUBLIC        SCON
+  D:0088H         PUBLIC        TCON
+  B:0080H.0       PUBLIC        led
+  C:01D4H         PUBLIC        _miaobiao
+  C:04A0H         PUBLIC        shumaguan
+  C:03C9H         PUBLIC        liushuideng1
+  C:02F7H         PUBLIC        liushuideng2
+  C:00ADH         PUBLIC        _shumaguan__dtx
+  D:00C8H         PUBLIC        T2CON
+  D:000CH         PUBLIC        i
+  C:024AH         PUBLIC        shumaguan__dt
+  D:000EH         PUBLIC        j
+  C:0481H         PUBLIC        shumaguan__jt
+  B:00A0H.7       PUBLIC        wei1
+  B:00A0H.6       PUBLIC        wei2
+  B:00A0H.5       PUBLIC        wei3
+  B:00A0H.4       PUBLIC        wei4
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          DIYIGELIANG
+BL51 BANKED LINKER/LOCATER V6.22                                                      01/30/2018  18:09:19  PAGE 5
+
+
+  C:0003H         LINE#         10
+  C:0003H         LINE#         11
+  C:0003H         LINE#         12
+  C:0005H         LINE#         13
+  -------         ENDPROC       DIYIGELIANG
+  -------         PROC          SHANSHUO1
+  C:036FH         LINE#         16
+  C:036FH         LINE#         17
+  C:036FH         LINE#         18
+  C:0371H         LINE#         19
+  C:0377H         LINE#         20
+  C:0385H         LINE#         21
+  C:0387H         LINE#         22
+  C:038DH         LINE#         23
+  C:039BH         LINE#         24
+  -------         ENDPROC       SHANSHUO1
+  -------         PROC          SHANSHUO2
+  C:03F6H         LINE#         29
+  C:03F6H         LINE#         30
+  C:03F6H         LINE#         31
+  C:03F8H         LINE#         32
+  C:03FEH         LINE#         33
+  C:040BH         LINE#         34
+  C:040DH         LINE#         35
+  C:0413H         LINE#         36
+  C:0420H         LINE#         37
+  -------         ENDPROC       SHANSHUO2
+  -------         PROC          SHANSHUO3
+  C:039CH         LINE#         39
+  C:039CH         LINE#         40
+  C:039CH         LINE#         41
+  C:039EH         LINE#         42
+  C:03B2H         LINE#         43
+  C:03B4H         LINE#         44
+  C:03C8H         LINE#         45
+  -------         ENDPROC       SHANSHUO3
+  -------         PROC          SHANSHUO4
+  C:043FH         LINE#         49
+  C:043FH         LINE#         50
+  C:043FH         LINE#         51
+  C:0441H         LINE#         52
+  C:0448H         LINE#         53
+  C:044AH         LINE#         54
+  -------         ENDPROC       SHANSHUO4
+  -------         PROC          LIUSHUIDENG1
+  C:03C9H         LINE#         60
+  C:03C9H         LINE#         61
+  C:03C9H         LINE#         62
+  C:03CCH         LINE#         63
+  C:03D2H         LINE#         64
+  C:03D2H         LINE#         65
+  C:03D9H         LINE#         66
+  C:03E0H         LINE#         67
+  C:03F5H         LINE#         68
+  -------         ENDPROC       LIUSHUIDENG1
+  -------         PROC          LIUSHUIDENG2
+  -------         DO            
+BL51 BANKED LINKER/LOCATER V6.22                                                      01/30/2018  18:09:19  PAGE 6
+
+
+  D:0016H         SYMBOL        a
+  D:0017H         SYMBOL        b
+  -------         ENDDO         
+  C:02F7H         LINE#         72
+  C:02F7H         LINE#         73
+  C:02F7H         LINE#         75
+  C:02FAH         LINE#         76
+  C:02FFH         LINE#         77
+  C:02FFH         LINE#         78
+  C:0306H         LINE#         79
+  C:030CH         LINE#         80
+  C:0316H         LINE#         81
+  C:031AH         LINE#         82
+  C:0321H         LINE#         83
+  C:0334H         LINE#         84
+  -------         ENDPROC       LIUSHUIDENG2
+  -------         PROC          SHUMAGUAN__JT
+  C:0481H         LINE#         88
+  C:0481H         LINE#         89
+  C:0481H         LINE#         90
+  C:0483H         LINE#         91
+  C:0485H         LINE#         92
+  C:0487H         LINE#         93
+  C:0489H         LINE#         94
+  C:0490H         LINE#         96
+  -------         ENDPROC       SHUMAGUAN__JT
+  -------         PROC          SHUMAGUAN__DT
+  C:024AH         LINE#         102
+  C:024AH         LINE#         103
+  C:024AH         LINE#         104
+  C:024CH         LINE#         105
+  C:024EH         LINE#         106
+  C:0250H         LINE#         107
+  C:0252H         LINE#         108
+  C:0259H         LINE#         109
+  C:0260H         LINE#         110
+  C:0262H         LINE#         111
+  C:0264H         LINE#         112
+  C:0266H         LINE#         113
+  C:0268H         LINE#         114
+  C:026FH         LINE#         115
+  C:0276H         LINE#         116
+  C:0278H         LINE#         117
+  C:027AH         LINE#         118
+  C:027CH         LINE#         119
+  C:027EH         LINE#         120
+  C:0285H         LINE#         121
+  C:028CH         LINE#         122
+  C:028EH         LINE#         123
+  C:0290H         LINE#         124
+  C:0292H         LINE#         125
+  C:0294H         LINE#         126
+  C:029BH         LINE#         127
+  -------         ENDPROC       SHUMAGUAN__DT
+  -------         PROC          _SHUMAGUAN__DTX
+  D:0002H         SYMBOL        num
+  -------         DO            
+BL51 BANKED LINKER/LOCATER V6.22                                                      01/30/2018  18:09:19  PAGE 7
+
+
+  D:0010H         SYMBOL        g
+  D:0011H         SYMBOL        s
+  D:0012H         SYMBOL        b
+  D:0007H         SYMBOL        q
+  -------         ENDDO         
+  C:00ADH         LINE#         134
+  C:00B1H         LINE#         135
+  C:00B1H         LINE#         137
+  C:00EDH         LINE#         138
+  C:00EFH         LINE#         139
+  C:00F1H         LINE#         140
+  C:00F3H         LINE#         141
+  C:00F5H         LINE#         142
+  C:00FCH         LINE#         143
+  C:0103H         LINE#         144
+  C:0105H         LINE#         145
+  C:0107H         LINE#         146
+  C:0109H         LINE#         147
+  C:010BH         LINE#         148
+  C:0113H         LINE#         149
+  C:011AH         LINE#         150
+  C:011CH         LINE#         151
+  C:011EH         LINE#         152
+  C:0120H         LINE#         153
+  C:0122H         LINE#         154
+  C:012AH         LINE#         155
+  C:0131H         LINE#         156
+  C:0133H         LINE#         157
+  C:0135H         LINE#         158
+  C:0137H         LINE#         159
+  C:0139H         LINE#         160
+  C:0141H         LINE#         161
+  -------         ENDPROC       _SHUMAGUAN__DTX
+  -------         PROC          _MIAOBIAO
+  D:0007H         SYMBOL        num1
+  D:0005H         SYMBOL        num2
+  -------         DO            
+  D:0013H         SYMBOL        g
+  D:0014H         SYMBOL        s
+  D:0015H         SYMBOL        b
+  D:0007H         SYMBOL        q
+  -------         ENDDO         
+  C:01D4H         LINE#         168
+  C:01D4H         LINE#         169
+  C:01D4H         LINE#         171
+  C:01F0H         LINE#         172
+  C:01F2H         LINE#         173
+  C:01F4H         LINE#         174
+  C:01F6H         LINE#         175
+  C:01F8H         LINE#         176
+  C:01FEH         LINE#         177
+  C:0205H         LINE#         178
+  C:0207H         LINE#         179
+  C:0209H         LINE#         180
+  C:020BH         LINE#         181
+  C:020DH         LINE#         182
+  C:0215H         LINE#         183
+BL51 BANKED LINKER/LOCATER V6.22                                                      01/30/2018  18:09:19  PAGE 8
+
+
+  C:021CH         LINE#         184
+  C:021EH         LINE#         185
+  C:0220H         LINE#         186
+  C:0222H         LINE#         187
+  C:0224H         LINE#         188
+  C:022CH         LINE#         189
+  C:0233H         LINE#         190
+  C:0235H         LINE#         191
+  C:0237H         LINE#         192
+  C:0239H         LINE#         193
+  C:023BH         LINE#         194
+  C:0243H         LINE#         195
+  -------         ENDPROC       _MIAOBIAO
+  -------         ENDMOD        LED
+
+  -------         MODULE        KEY
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  B:00A0H.3       PUBLIC        key4
+  D:0080H         PUBLIC        P0
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  D:00A8H         PUBLIC        IE
+  D:00B8H         PUBLIC        IP
+  B:00B0H.4       PUBLIC        jiao
+  D:0098H         PUBLIC        SCON
+  D:0088H         PUBLIC        TCON
+  D:0018H         PUBLIC        temp
+  C:000EH         PUBLIC        key
+  B:0088H.4       PUBLIC        TR0
+  B:0080H.1       PUBLIC        led1
+  D:00C8H         PUBLIC        T2CON
+  B:0080H.4       PUBLIC        led2
+  B:0080H.7       PUBLIC        led3
+  B:0080H.3       PUBLIC        led4
+  B:0020H.0       PUBLIC        flag_key1
+  D:00D0H         PUBLIC        PSW
+  B:00A0H.0       PUBLIC        key1
+  B:00A0H.2       PUBLIC        key2
+  B:00A0H.1       PUBLIC        key3
+  -------         PROC          KEY
+  C:000EH         LINE#         9
+  C:000EH         LINE#         10
+  C:000EH         LINE#         11
+  C:0011H         LINE#         12
+  C:0011H         LINE#         13
+  C:0018H         LINE#         14
+  C:001BH         LINE#         15
+  C:001BH         LINE#         16
+  C:001DH         LINE#         17
+  C:0020H         LINE#         18
+  C:0022H         LINE#         19
+  C:0024H         LINE#         20
+  C:0026H         LINE#         21
+  C:0028H         LINE#         26
+  C:0028H         LINE#         27
+  C:0028H         LINE#         28
+BL51 BANKED LINKER/LOCATER V6.22                                                      01/30/2018  18:09:19  PAGE 9
+
+
+  C:002BH         LINE#         29
+  C:002BH         LINE#         30
+  C:0032H         LINE#         31
+  C:0035H         LINE#         32
+  C:0035H         LINE#         33
+  C:0037H         LINE#         34
+  C:003AH         LINE#         35
+  C:003CH         LINE#         36
+  C:003EH         LINE#         37
+  C:0041H         LINE#         38
+  C:0043H         LINE#         40
+  C:0043H         LINE#         41
+  C:0043H         LINE#         42
+  C:0046H         LINE#         43
+  C:0046H         LINE#         44
+  C:0049H         LINE#         45
+  C:0049H         LINE#         46
+  C:0050H         LINE#         47
+  C:0053H         LINE#         48
+  C:0053H         LINE#         49
+  C:0055H         LINE#         50
+  C:0058H         LINE#         51
+  C:005AH         LINE#         52
+  C:005CH         LINE#         53
+  C:005EH         LINE#         54
+  C:0067H         LINE#         55
+  C:0067H         LINE#         56
+  C:006AH         LINE#         57
+  C:006CH         LINE#         58
+  C:0074H         LINE#         59
+  C:0074H         LINE#         60
+  C:0077H         LINE#         61
+  C:0077H         LINE#         62
+  C:0077H         LINE#         63
+  C:0077H         LINE#         64
+  C:0077H         LINE#         65
+  C:0077H         LINE#         66
+  C:007AH         LINE#         67
+  C:007AH         LINE#         68
+  C:007DH         LINE#         69
+  C:007DH         LINE#         70
+  C:0084H         LINE#         71
+  C:0087H         LINE#         72
+  C:0087H         LINE#         73
+  C:0089H         LINE#         74
+  C:008CH         LINE#         75
+  C:008EH         LINE#         76
+  C:0090H         LINE#         77
+  C:0092H         LINE#         78
+  C:009BH         LINE#         79
+  C:009BH         LINE#         80
+  C:009EH         LINE#         81
+  C:00A0H         LINE#         82
+  C:00A9H         LINE#         83
+  C:00A9H         LINE#         84
+  C:00ACH         LINE#         85
+  C:00ACH         LINE#         86
+BL51 BANKED LINKER/LOCATER V6.22                                                      01/30/2018  18:09:19  PAGE 10
+
+
+  C:00ACH         LINE#         87
+  C:00ACH         LINE#         88
+  C:00ACH         LINE#         89
+  C:00ACH         LINE#         90
+  -------         ENDPROC       KEY
+  -------         ENDMOD        KEY
+
+  -------         MODULE        ?C?UIDIV
+  C:02A2H         PUBLIC        ?C?UIDIV
+  -------         ENDMOD        ?C?UIDIV
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?INIT_TIMER0_MS1?MAIN
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?DIYIGELIANG?LED
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?SHANSHUO1?LED
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?SHANSHUO2?LED
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?SHANSHUO3?LED
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?SHANSHUO4?LED
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?LIUSHUIDENG1?LED
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?LIUSHUIDENG2?LED
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?SHUMAGUAN__JT?LED
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?SHUMAGUAN__DT?LED
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SHUMAGUAN__DTX?LED
+
+Program Size: data=26.1 xdata=0 code=1189
+LINK/LOCATE RUN COMPLETE.  11 WARNING(S),  0 ERROR(S)
