@@ -1,0 +1,55 @@
+C51 COMPILER V9.00   MAIN                                                                  10/28/2015 21:30:43 PAGE 1   
+
+
+C51 COMPILER V9.00, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\output\main.obj
+COMPILER INVOKED BY: D:\Keil\C51\BIN\C51.EXE main.c BROWSE DEBUG OBJECTEXTEND PRINT(.\list\main.lst) OBJECT(.\output\mai
+                    -n.obj)
+
+line level    source
+
+   1          #include "common.h"
+   2          #include "lcd1602.h"
+   3          #include "IIC.h"
+   4          #include "change.h"
+   5          
+   6          
+   7          //初始化MPU6050
+   8          void init_MPU6050(void)
+   9          {
+  10   1              Single_WriteIIC(PWR_MGMT_1,0x00);//解除休眠状态
+  11   1              Single_WriteIIC(SMPLRT_DIV,0x07);
+  12   1              Single_WriteIIC(CONFIG,0x06);
+  13   1              Single_WriteIIC(GYRO_CONFIG,0x18);
+  14   1              Single_WriteIIC(ACCEL_CONFIG,0x01);
+  15   1      }
+  16          
+  17          
+  18          void main()
+  19          {                       
+  20   1              init_lcd1602();//液晶初始化
+  21   1              init_MPU6050();//初始化MPU6050
+  22   1              while(1)
+  23   1              {
+  24   2                      display(2,0,hecheng_data(ACCEL_XOUT_H));//显示X轴加速度
+  25   2                      display(7,0,hecheng_data(ACCEL_YOUT_H));//显示Y轴加速度
+  26   2                      display(12,0,hecheng_data(ACCEL_ZOUT_H));//显示Z轴加速度
+  27   2                      display(2,1,hecheng_data(GYRO_XOUT_H));//显示X轴角速度
+  28   2                      display(7,1,hecheng_data(GYRO_YOUT_H));//显示Y轴角速度
+  29   2                      display(12,1,hecheng_data(GYRO_ZOUT_H));//显示Z轴角速度
+  30   2              }
+  31   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    139    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

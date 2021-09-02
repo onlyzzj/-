@@ -1,0 +1,7 @@
+".\output\main.obj",
+".\output\lcd1602.obj",
+".\output\IIC.obj",
+".\output\delay.obj",
+".\output\change.obj" 
+TO ".\output\MPU6050" 
+PRINT(".\list\MPU6050.m51") RAMSIZE(256) 
