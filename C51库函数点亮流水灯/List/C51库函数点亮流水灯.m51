@@ -1,0 +1,92 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        12/10/2014  20:48:08  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+D:\KEIL\C51\BIN\BL51.EXE .\Output\main.obj, .\Output\delay.obj TO .\Output\C51库函数点亮流水灯 PRINT (.\List\C51库函数点
+>> 亮流水灯.m51) RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  .\Output\main.obj (MAIN)
+  .\Output\delay.obj (DELAY)
+  D:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  .\Output\C51库函数点亮流水灯 (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            IDATA   0008H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     001EH     UNIT         ?PR?_DELAYMS?DELAY
+            CODE    0021H     0019H     UNIT         ?PR?MAIN?MAIN
+            CODE    003AH     000CH     UNIT         ?C_C51STARTUP
+
+
+
+OVERLAY MAP OF MODULE:   .\Output\C51库函数点亮流水灯 (MAIN)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?MAIN
+
+?PR?MAIN?MAIN
+  +--> ?PR?_DELAYMS?DELAY
+
+
+
+SYMBOL TABLE OF MODULE:  .\Output\C51库函数点亮流水灯 (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  C:0021H         PUBLIC        main
+  -------         PROC          MAIN
+  C:0021H         LINE#         6
+  C:0021H         LINE#         7
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/10/2014  20:48:08  PAGE 2
+
+
+  C:0021H         LINE#         8
+  C:0024H         LINE#         9
+  C:0024H         LINE#         10
+  C:0024H         LINE#         12
+  C:0031H         LINE#         13
+  C:0038H         LINE#         14
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        MAIN
+
+  -------         MODULE        DELAY
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  C:0003H         PUBLIC        _delayms
+  -------         PROC          _DELAYMS
+  D:0006H         SYMBOL        xms
+  -------         DO            
+  D:0006H         SYMBOL        i
+  D:0004H         SYMBOL        j
+  -------         ENDDO         
+  C:0003H         LINE#         2
+  C:0003H         LINE#         3
+  C:0003H         LINE#         5
+  C:000CH         LINE#         6
+  C:0020H         LINE#         7
+  -------         ENDPROC       _DELAYMS
+  -------         ENDMOD        DELAY
+
+Program Size: data=9.0 xdata=0 code=70
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

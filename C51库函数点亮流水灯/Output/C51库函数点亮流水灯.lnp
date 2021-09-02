@@ -1,0 +1,4 @@
+".\Output\main.obj",
+".\Output\delay.obj" 
+TO ".\Output\C51库函数点亮流水灯" 
+PRINT(".\List\C51库函数点亮流水灯.m51") RAMSIZE(256) 
