@@ -1,0 +1,37 @@
+C51 COMPILER V9.54   US100                                                                 04/18/2016 20:41:00 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE US100
+OBJECT MODULE PLACED IN .\output\us100.obj
+COMPILER INVOKED BY: D:\Keil_v5\C51\BIN\C51.EXE us100.c BROWSE DEBUG OBJECTEXTEND PRINT(.\list\us100.lst) TABS(2) OBJECT
+                    -(.\output\us100.obj)
+
+line level    source
+
+   1          #include "us100.h"
+   2          #include "delay.h"
+   3          
+   4          
+   5          
+   6          unsigned char RcvIndex;
+   7          
+   8          
+   9          
+  10          
+  11          
+  12          
+  13          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   ----    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      1    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
