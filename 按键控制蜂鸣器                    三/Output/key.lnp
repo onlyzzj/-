@@ -1,0 +1,6 @@
+".\Output\main.obj",
+".\Output\key.obj",
+".\Output\delay.obj",
+".\Output\led.obj" 
+TO ".\Output\key" 
+PRINT(".\List\key.m51") RAMSIZE(256) 

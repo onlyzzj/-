@@ -1,0 +1,94 @@
+C51 COMPILER V9.00   MAIN                                                                  04/10/2015 20:33:18 PAGE 1   
+
+
+C51 COMPILER V9.00, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN main.OBJ
+COMPILER INVOKED BY: d:\Keil\C51\BIN\C51.EXE main.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include <reg52.h>
+   2          #define uchar unsigned char
+   3          #define uint unsigned int
+   4          
+   5          sbit led1=P0^0;
+   6          sbit key1=P2^0;
+   7          sbit jiao=P3^4;
+   8          
+   9          
+  10          uchar a;
+  11          
+  12          void delayms(uint xms)
+  13          {
+  14   1              uint i,j;
+  15   1              for(i=xms;i>0;i--)
+  16   1                      for(j=110;j>0;j--);
+  17   1      }
+  18          
+  19          
+  20          void send(uchar keynum)
+  21          {
+  22   1              ES=0;
+  23   1              SBUF=keynum;
+  24   1              while(!TI);
+  25   1              TI=0;
+  26   1              ES=1;
+  27   1      }
+  28          
+  29          void key(void)
+  30          {
+  31   1              if(key1==0)
+  32   1              {
+  33   2                      delayms(10);
+  34   2                      if(key1==0)
+  35   2                      {
+  36   3      //                      jiao=0;
+  37   3                              while(!key1);
+  38   3      //                      jiao=1;
+  39   3                              send(key1);
+  40   3                      }        
+  41   2              }
+  42   1      }
+  43          
+  44          
+  45          
+  46          void main(void)
+  47          {
+  48   1              TMOD=0x20;//设定T1计时器工作方式2
+  49   1              TH1=0xfd;//装初值
+  50   1              TL1=0xfd;//装初值
+  51   1              TR1=1;//启动计时器
+  52   1              SM0=0;
+  53   1              SM1=1;//设定串口工作方式1
+  54   1              REN=1;//允许串口接收
+  55   1              EA=1;//开总中断
+C51 COMPILER V9.00   MAIN                                                                  04/10/2015 20:33:18 PAGE 2   
+
+  56   1              ES=1;//开串口中断
+  57   1              while(1)
+  58   1              {
+  59   2                      key();  
+  60   2              }
+  61   1      }
+  62          
+  63          
+  64          
+  65          void ser()interrupt 4
+  66          {
+  67   1              RI=0;
+  68   1              P0=SBUF;
+  69   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     99    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      1    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

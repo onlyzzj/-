@@ -1,0 +1,5 @@
+".\Output\main.obj",
+".\Output\led.obj",
+".\Output\delay.obj" 
+TO ".\Output\标准工程" 
+PRINT(".\List\标准工程.m51") RAMSIZE(256) 

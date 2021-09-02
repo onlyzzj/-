@@ -1,0 +1,109 @@
+C51 COMPILER V9.00   LED                                                                   11/27/2014 20:36:08 PAGE 1   
+
+
+C51 COMPILER V9.00, COMPILATION OF MODULE LED
+OBJECT MODULE PLACED IN .\Output\led.obj
+COMPILER INVOKED BY: d:\Keil\C51\BIN\C51.EXE led.c BROWSE DEBUG OBJECTEXTEND PRINT(.\List\led.lst) OBJECT(.\Output\led.o
+                    -bj)
+
+line level    source
+
+   1          #include  "led.h"
+   2          #include  "delay.h"
+   3          int i;
+   4          uint j;
+   5          
+   6          
+   7          
+   8          
+   9          void diyigeliang(void)
+  10          {
+  11   1       led=0;
+  12   1      }
+  13          
+  14          
+  15          void shanshuo1(void)
+  16          { 
+  17   1              led=0;
+  18   1              i=-30000;
+  19   1              while(i++);
+  20   1              led=1;
+  21   1              i=-30000;
+  22   1              while(i++);
+  23   1      }
+  24          
+  25          
+  26          
+  27          
+  28          void shanshuo2(void)
+  29          {
+  30   1              led=0;
+  31   1              i=50000;
+  32   1              while(i--);
+  33   1              led=1;
+  34   1              i=50000;
+  35   1              while(i--);
+  36   1      }
+  37          
+  38          void shanshuo3(void)
+  39          {
+  40   1              led=0;
+  41   1              for(j=50000;j>0;j--);
+  42   1              led=1;
+  43   1          for(j=50000;j>0;j--);
+  44   1      }
+  45          
+  46          
+  47          
+  48          void shanshuo4(void)
+  49          {
+  50   1              led=0;
+  51   1              delayms(500);
+  52   1              led=1;
+  53   1          delayms(500);
+  54   1      }
+C51 COMPILER V9.00   LED                                                                   11/27/2014 20:36:08 PAGE 2   
+
+  55          
+  56          
+  57          
+  58          
+  59          void liushuideng1(void)
+  60          {
+  61   1              P0=0xfe;
+  62   1              for(i=8;i>0;i--)
+  63   1              {       
+  64   2                      delayms(500);
+  65   2                      P0=(P0<<1)+1;
+  66   2              }       
+  67   1      }
+  68          
+  69          
+  70          
+  71          void liushuideng2(void)
+  72          {
+  73   1              uchar a,b;
+  74   1              P0=0xfe;
+  75   1              for(i=0;i<7;i++)
+  76   1              {
+  77   2                      delayms(200);
+  78   2                      a=P0<<1;
+  79   2                      b=P0>>7;
+  80   2                      P0=a|b;
+  81   2                      delayms(200);
+  82   2              }
+  83   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    261    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      4       2
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
