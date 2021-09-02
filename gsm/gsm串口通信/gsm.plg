@@ -1,0 +1,17 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Project:</h2>
+C:\Users\Administrator\Desktop\gsm\gsm.uvproj
+Project File Date:  09/22/2015
+
+<h2>Output:</h2>
+Build target 'Target 1'
+compiling main.c...
+compiling gsm.c...
+linking...
+*** WARNING L10: CANNOT DETERMINE ROOT SEGMENT
+Program Size: data=0.0 xdata=0 code=0
+creating hex file from ".\output\gsm"...
+".\output\gsm" - 0 Error(s), 1 Warning(s).

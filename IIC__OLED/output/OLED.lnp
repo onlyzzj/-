@@ -1,0 +1,7 @@
+".\output\main.obj",
+".\output\IIC.obj",
+".\output\OLED.obj",
+".\output\delay.obj",
+".\output\bmp.obj" 
+TO ".\output\OLED" 
+PRINT(".\list\OLED.m51") RAMSIZE(256) 

@@ -1,0 +1,309 @@
+C51 COMPILER V9.54   GSM                                                                   04/19/2016 09:04:56 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE GSM
+OBJECT MODULE PLACED IN .\output\gsm.obj
+COMPILER INVOKED BY: D:\Keil_v5\C51\BIN\C51.EXE gsm.c BROWSE DEBUG OBJECTEXTEND PRINT(.\list\gsm.lst) TABS(2) OBJECT(.\o
+                    -utput\gsm.obj)
+
+line level    source
+
+   1          #include "gsm.h"                                                     
+   2          #include "delay.h"
+   3          
+   4          
+   5          #define CALL_YOU_TELNUMBER "ATD18326638928;\r\n"//´òµç»°,ÌîÈëÄãÊÖ»úÉÏµÄÊÖ»úºÅÂë,²»ÊÇgsmÄ£¿éÉÏµÄ
+   6          #define OVER_YOU_TELNUMBER "ATH\r\n"//¹Òµç»°,ÌîÈëÄãÊÖ»úÉÏµÄÊÖ»úºÅÂë,²»ÊÇgsmÄ£¿éÉÏµÄ
+   7          #define ACCEPT_YOU_TELNUMBER "ATA\r\n"//½Óµç»°,ÌîÈëÄãÊÖ»úÉÏµÄÊÖ»úºÅÂë,²»ÊÇgsmÄ£¿éÉÏµÄ
+   8          #define SEND_MESSA_TO_YOUR "at+cmgs=\"18326638928\"\r\n"//ÌîÈëÄãÊÖ»úÉÏµÄÊÖ»úºÅÂë,²»ÊÇgsmÄ£¿éÉÏµÄ
+   9          #define SEND_MESSA_CONTENT_english "warning"//·¢¶ÌÐÅÄÚÈÝ"warning"
+  10          #define SEND_MESSA_CONTENT_chinese "0891683110305005F011000D91688123668329F80008A720002300317535996D950500
+             -20002300327A7A8C030020002300336D178863673A"//·¢¶ÌÐÅÄÚÈÝ"ÇëÊäÈëÃÜÂë£º",Ç°ÃæÊÇgsmÄ£¿éÉÏµÄÊÖ»úºÅËùÔÚµØµÄ¶ÌÐÅÖÐÐÄºÅÂë£¬ºóÃæÊ
+             -Ç½ÓÊÕ¶ÌÐÅµÄÊÖ»úºÅÂë
+  11          #define MAXCHAR 81
+  12          
+  13          
+  14          uchar j=0,aa[MAXCHAR];
+  15          uchar code ATE0[]="ATE0\r\n";//¹Ø±Õ»ØÏÔ
+  16          uchar code ATCN[]="AT+CNMI=2,1\r\n";//¶ÌÐÅ´æÈëSIM¿¨
+  17          uchar code CREG_CMD[]="AT+CREG?\r\n";//²éÑ¯ÍøÂç×¢²áÇé¿ö
+  18          uchar code SMS_send[]="AT+CMGS=47\r\n";//·¢ËÍ¶ÌÏûÏ¢µÄ×Ö½ÚÊýÎª27
+  19          uchar code CMGF0[]="AT+CMGF=0\r\n";//PDUÄ£Ê½
+  20          uchar code CMGF1[]="AT+CMGF=1\r\n";//TextÄ£Ê½
+  21          uchar code CMGR[]="AT+CMGR=1\r\n";//¶ÁÈ¡µÚ1Ìõ¶ÌÏûÏ¢
+  22          uchar code CMGD[]="AT+CMGD=1\r\n";//É¾³ýµÚ1Ìõ¶ÌÏûÏ¢
+  23          
+  24          
+  25          void send_english(void)
+  26          {
+  27   1        clearBuff();
+  28   1          P0=0XFF;//µÆÈ«Ãð
+  29   1        Print_Str(CMGF1);//TextÄ£Ê½
+  30   1          while(strstr(aa,"OK")==NULL);
+  31   1          led(0x01);//µÚ1¸öµÆÃð
+  32   1        clearBuff();
+  33   1        Print_Str(SEND_MESSA_TO_YOUR);
+  34   1        while(strstr(aa,">")==NULL);
+  35   1          led(0x02);//µÚ2¸öµÆÃð
+  36   1        clearBuff();
+  37   1        Print_Str(SEND_MESSA_CONTENT_english);//·¢¶ÌÐÅÄÚÈÝ"warning"
+  38   1          Print_Char(0x1A);//·¢ËÍÍêÉÏÃæµÄÍêÕû´úÂëºó£¬ÐèÒª·¢ËÍ¡°Ctrl+Z¡±½áÊø·ûºÅ,ÆäASCIIÂëÖµÎª26£¬×ª»»Îª16½øÖÆ´úÂ
+             -ëÎª£º1A¡£
+  39   1        while(strstr(aa,"OK")==NULL);
+  40   1          led(0x04);//µÚ3¸öµÆÃð
+  41   1          clearBuff();
+  42   1      }
+  43          
+  44          
+  45          void send_chinese(void)
+  46          {
+  47   1        clearBuff();
+  48   1          P0=0XFF;//µÆÈ«Ãð
+  49   1        Print_Str(CMGF0);//PDUÄ£Ê½
+  50   1          while(strstr(aa,"OK")==NULL);
+  51   1          led(0x01);//µÚ1¸öµÆÃð
+C51 COMPILER V9.54   GSM                                                                   04/19/2016 09:04:56 PAGE 2   
+
+  52   1        clearBuff();
+  53   1        Print_Str(SMS_send);//·¢ËÍ¶ÌÏûÏ¢µÄ×Ö½ÚÊýÎª27
+  54   1        while(strstr(aa,">")==NULL);
+  55   1          led(0x02);//µÚ2¸öµÆÃð
+  56   1        clearBuff();
+  57   1        Print_Str(SEND_MESSA_CONTENT_chinese);//·¢¶ÌÐÅÄÚÈÝ
+  58   1          Print_Char(0x1A);//·¢ËÍÍêÉÏÃæµÄÍêÕû´úÂëºó£¬ÐèÒª·¢ËÍ¡°Ctrl+Z¡±½áÊø·ûºÅ,ÆäASCIIÂëÖµÎª26£¬×ª»»Îª16½øÖÆ´úÂ
+             -ëÎª£º1A¡£
+  59   1          while(strstr(aa,"OK")==NULL);
+  60   1        led(0x04);//µÚ3¸öµÆÃð
+  61   1          clearBuff();
+  62   1      }
+  63          
+  64          
+  65          void checkenglish_sendenglish(void)
+  66          {
+  67   1        clearBuff();
+  68   1        P0=0XFF;//µÆÈ«Ãð
+  69   1        while(strstr(aa,"SM")==NULL);
+  70   1          led(0x01);//µÚ1¸öµÆÃð
+  71   1          clearBuff();
+  72   1        Print_Str(CMGF1);//TextÄ£Ê½
+  73   1          while(strstr(aa,"OK")==NULL);
+  74   1          led(0x02);//µÚ2¸öµÆÃð
+  75   1        clearBuff();
+  76   1        Print_Str(CMGR);//¶ÁÈ¡µÚ1Ìõ¶ÌÏûÏ¢
+  77   1          while(strstr(aa,"OK")==NULL);
+  78   1          led(0x04);//µÚ3¸öµÆÃð
+  79   1        send_english();
+  80   1        Print_Str(CMGD); //É¾³ýµÚ1Ìõ¶ÌÏûÏ¢
+  81   1        while(strstr(aa,"OK")==NULL);
+  82   1        led(0x08);//µÚ4¸öµÆÃð
+  83   1        clearBuff();
+  84   1      }
+  85          
+  86          
+  87          void checkenglish_sendchinese(void)
+  88          {
+  89   1        clearBuff();
+  90   1        P0=0XFF;//µÆÈ«Ãð
+  91   1        while(strstr(aa,"SM")==NULL);
+  92   1          led(0x01);//µÚ1¸öµÆÃð
+  93   1          clearBuff();
+  94   1        Print_Str(CMGF1);//TextÄ£Ê½
+  95   1          while(strstr(aa,"OK")==NULL);
+  96   1          led(0x02);//µÚ2¸öµÆÃð
+  97   1        clearBuff();
+  98   1        Print_Str(CMGR);//¶ÁÈ¡µÚ1Ìõ¶ÌÏûÏ¢
+  99   1          while(strstr(aa,"OK")==NULL);
+ 100   1          led(0x04);//µÚ3¸öµÆÃð
+ 101   1        send_chinese();
+ 102   1        Print_Str(CMGD); //É¾³ýµÚ1Ìõ¶ÌÏûÏ¢
+ 103   1        while(strstr(aa,"OK")==NULL);
+ 104   1        led(0x08);//µÚ4¸öµÆÃð
+ 105   1        clearBuff();
+ 106   1      }
+ 107          
+ 108          
+ 109          void checkchinese_sendenglish(void)
+ 110          {
+ 111   1        clearBuff();
+ 112   1        P0=0XFF;//µÆÈ«Ãð
+C51 COMPILER V9.54   GSM                                                                   04/19/2016 09:04:56 PAGE 3   
+
+ 113   1        while(strstr(aa,"SM")==NULL);
+ 114   1          led(0x01);//µÚ1¸öµÆÃð
+ 115   1          clearBuff();
+ 116   1        Print_Str(CMGF0);//PDUÄ£Ê½
+ 117   1          while(strstr(aa,"OK")==NULL);
+ 118   1          led(0x02);//µÚ2¸öµÆÃð
+ 119   1        clearBuff();
+ 120   1        Print_Str(CMGR);//¶ÁÈ¡µÚ1Ìõ¶ÌÏûÏ¢
+ 121   1          while(strstr(aa,"OK")==NULL);
+ 122   1          led(0x04);//µÚ3¸öµÆÃð
+ 123   1        send_chinese();
+ 124   1        Print_Str(CMGD); //É¾³ýµÚ1Ìõ¶ÌÏûÏ¢
+ 125   1        while(strstr(aa,"OK")==NULL);
+ 126   1        led(0x08);//µÚ4¸öµÆÃð
+ 127   1        clearBuff();
+ 128   1      }
+ 129          
+ 130          
+ 131          void checkchinese_sendchinese(void)
+ 132          {
+ 133   1        clearBuff();
+ 134   1        P0=0XFF;//µÆÈ«Ãð
+ 135   1        while(strstr(aa,"SM")==NULL);
+ 136   1          led(0x01);//µÚ1¸öµÆÃð
+ 137   1          clearBuff();
+ 138   1        Print_Str(CMGF0);//PDUÄ£Ê½
+ 139   1          while(strstr(aa,"OK")==NULL);
+ 140   1          led(0x02);//µÚ2¸öµÆÃð
+ 141   1        clearBuff();
+ 142   1        Print_Str(CMGR);//¶ÁÈ¡µÚ1Ìõ¶ÌÏûÏ¢
+ 143   1          while(strstr(aa,"OK")==NULL);
+ 144   1          led(0x04);//µÚ3¸öµÆÃð
+ 145   1        send_chinese();
+ 146   1        Print_Str(CMGD); //É¾³ýµÚ1Ìõ¶ÌÏûÏ¢
+ 147   1        while(strstr(aa,"OK")==NULL);
+ 148   1        led(0x08);//µÚ4¸öµÆÃð
+ 149   1        clearBuff();
+ 150   1      }
+ 151          
+ 152          
+ 153          void send_call1(void)//´òÍ¨ÁË
+ 154          {
+ 155   1          clearBuff();
+ 156   1        P0=0XFF;//µÆÈ«Ãð
+ 157   1          Print_Str(CALL_YOU_TELNUMBER);//´òµç»°
+ 158   1        while(strstr(aa,"OK")==NULL);
+ 159   1        led(0x01);//µÚ1¸öµÆÃð
+ 160   1          clearBuff();
+ 161   1        delay(1000);
+ 162   1        Print_Str(OVER_YOU_TELNUMBER);//¹Òµç»°
+ 163   1        while(strstr(aa,"OK")==NULL);
+ 164   1        led(0x04);//µÚ3¸öµÆÃð
+ 165   1          clearBuff();
+ 166   1      }
+ 167          
+ 168          
+ 169          void send_call2(void)//Ã»´òÍ¨ÁË
+ 170          {
+ 171   1          clearBuff();
+ 172   1        P0=0XFF;//µÆÈ«Ãð
+ 173   1          Print_Str(CALL_YOU_TELNUMBER);//´òµç»°
+ 174   1        delay(100);
+C51 COMPILER V9.54   GSM                                                                   04/19/2016 09:04:56 PAGE 4   
+
+ 175   1        led(0x01);//µÚ1¸öµÆÃð
+ 176   1          clearBuff();
+ 177   1        delay(500);
+ 178   1        Print_Str(OVER_YOU_TELNUMBER);//¹Òµç»°
+ 179   1        while(strstr(aa,"NO CARRIER")==NULL);
+ 180   1        led(0x02);//µÚ2¸öµÆÃð
+ 181   1          clearBuff();
+ 182   1      }
+ 183          
+ 184          void send_over(void)
+ 185          {
+ 186   1          clearBuff();
+ 187   1        P0=0XFF;//µÆÈ«Ãð
+ 188   1        while(strstr(aa,"RING")==NULL);
+ 189   1        led(0x01);//µÚ1¸öµÆÃð
+ 190   1          Print_Str(ACCEPT_YOU_TELNUMBER );//½Óµç»°
+ 191   1        while(strstr(aa,"OK")==NULL);
+ 192   1        led(0x02);//µÚ2¸öµÆÃð
+ 193   1          clearBuff();
+ 194   1        delay(500);
+ 195   1        Print_Str(OVER_YOU_TELNUMBER);//¹Òµç»°
+ 196   1        while(strstr(aa,"OK")==NULL);
+ 197   1        led(0x04);//µÚ3¸öµÆÃð
+ 198   1          clearBuff();
+ 199   1      }
+ 200          
+ 201          
+ 202          void Print_Char(uchar ch)//·¢ËÍµ¥¸ö×Ö·û
+ 203          {
+ 204   1          SBUF=ch; //ËÍÈë»º³åÇø
+ 205   1          while(TI!=1); //µÈ´ý·¢ËÍÍê±Ï
+ 206   1          TI=0; //Èí¼þÇåÁã
+ 207   1      }
+ 208          
+ 209          
+ 210          void Print_Str(uchar *str)//·¢ËÍ×Ö·û´®
+ 211          {
+ 212   1        while(*str!='\0')
+ 213   1          {
+ 214   2              Print_Char(*str);
+ 215   2              delay(2);
+ 216   2              str++;
+ 217   2          }
+ 218   1      
+ 219   1      }
+ 220          
+ 221          
+ 222          void clearBuff(void)
+ 223          {
+ 224   1          for(j=0;j<MAXCHAR;j++)
+ 225   1          {
+ 226   2              aa[j]=0x00;
+ 227   2          }
+ 228   1          j=0;
+ 229   1      }
+ 230          
+ 231          
+ 232          void led(int i)
+ 233          {
+ 234   1      //    P0 |= i;
+ 235   1      //    delay(20);
+ 236   1      //    P0 &= ~i;
+C51 COMPILER V9.54   GSM                                                                   04/19/2016 09:04:56 PAGE 5   
+
+ 237   1      //    delay(20);
+ 238   1      //    P0 |= i;
+ 239   1      //    delay(20);
+ 240   1      //    P0 &= ~i;
+ 241   1        P0=i;
+ 242   1      }
+ 243          
+ 244          
+ 245          void init_gsm(void)
+ 246          {
+ 247   1        clearBuff();
+ 248   1          Print_Str(ATE0);//¹Ø±Õ»ØÏÔ
+ 249   1          while(strstr(aa,"OK")==NULL);
+ 250   1          led(0xfe);//µÆ1
+ 251   1          clearBuff();
+ 252   1        Print_Str(ATCN);//¶ÌÐÅ´æÈëSIM¿¨
+ 253   1        while(strstr(aa,"OK")==NULL);
+ 254   1        led(0xfd);//µÆ2
+ 255   1        clearBuff();
+ 256   1        while(1)
+ 257   1          {
+ 258   2              Print_Str(CREG_CMD);//²éÑ¯ÍøÂç×¢²áÇé¿ö
+ 259   2              while(strstr(aa,"OK")==NULL);
+ 260   2              if(((aa[9]=='0')&&(aa[11]=='1'))||((aa[9]=='0')&&(aa[11]=='5')))
+ 261   2              {
+ 262   3                led(0xfb);//µÆ3
+ 263   3            clearBuff();
+ 264   3                  break;
+ 265   3              }
+ 266   2              else
+ 267   2              {
+ 268   3                  led(0xf7);//4
+ 269   3                  clearBuff();
+ 270   3              }
+ 271   2          }
+ 272   1      }
+ 273          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   1419    ----
+   CONSTANT SIZE    =    292    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     82       3
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

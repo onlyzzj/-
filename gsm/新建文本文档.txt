@@ -1,0 +1,186 @@
+#include<stc15.h>
+#include<string.h>
+typedef unsigned int  uint ;
+typedef unsigned char uchar;
+
+sbit key1=P3^4;
+sbit key2=P3^3;
+sbit key3=P3^2;
+sbit key4=P3^1;
+sbit key5=P3^0;
+
+sbit led=P2^7;
+
+#define MAXCHAR 81
+uchar  aa[MAXCHAR];
+
+uchar flag=0,j=0;
+uchar code calling[]="ATD18895738116;\r\n";
+uchar code message[]="AT+CMGS=\"18895738116\"\r\n";
+uchar code ATE0[]="ATE0\r\n";		  //关闭回显
+uchar code ATE1[]="ATE1\r\n";		  //打开回显
+uchar code ATCN[]="AT+CNMI=2,1\r\n";
+uchar code CMGF0[]="AT+CMGF=0\r\n";	  //短消息PDU模式
+uchar code CMGF1[]="AT+CMGF=1\r\n";	  //短消息TEXT模式
+uchar code CMGR[12]="AT+CMGR=1\r\n";  //从1储存区读取短消息
+uchar code CMGD[12]="AT+CMGD=1\r\n";  //从1储存区删除短消息
+uchar code CREG[]="AT+CREG?\r\n";	  //查询网络注册情况
+void init_uart(void)
+{
+	P_SW1|=0X80;		//将串口切换到P16,P17端口
+
+	SCON = 0x50;		//8位数据,可变波特率
+	AUXR |= 0x01;		//串口1选择定时器2为波特率发生器
+	AUXR |= 0x04;		//定时器2时钟为Fosc,即1T
+	T2L = 0xE0;		//设定定时初值
+	T2H = 0xFE;		//设定定时初值
+	AUXR |= 0x10;		//启动定时器2
+	EA=1;
+	ES=1;
+}
+
+void clearBuff(void)
+{
+    for(j=0;j<MAXCHAR;j++)
+    {
+        aa[j]=0x00;
+    }
+    j=0;
+}
+
+/***********************************************************
+函数名称：Print_Char
+函数功能：发送单个字符
+          入口参数:ch      出口参数：无
+***********************************************************/
+void Print_Char(uchar ch)//发送单个字符
+{
+    SBUF=ch; //送入缓冲区
+    while(!TI); //等待发送完毕
+    TI=0; //软件清零
+}
+/***********************************************************
+函数名称：Print_Str
+函数功能：发送字符串
+          入口参数:*str    出口参数：无
+***********************************************************/
+void Print_string(uchar *str)
+{
+	while(*str!='\0')
+	{						  
+		Print_Char(*str);
+		str++;
+	}
+}
+
+
+
+void delay_ms(uchar x)
+{
+	uchar i=0;
+	while(x--)
+	for(i=0;i<120;i++);
+}
+
+void init_gsm(void)//初始化GSM模块
+{
+	clearBuff();	 
+	Print_string(ATE0); //关闭回显
+	while(strstr(aa,"OK")==NULL);//如果模块没有响应，等待
+	clearBuff();
+	Print_string(CMGD); //短消息删除
+	while(strstr(aa,"OK")==NULL);//如果模块没有响应，等待
+	clearBuff();
+	Print_string(CREG);	//检测模块有没有注册到本地网络
+	while(strstr(aa,"OK")==NULL);//如果模块没有响应，等待
+	while(strstr(aa,"0,1")==NULL) //没有注册到本地网络
+	{
+		led=0;
+		delay_ms(200);
+		led=1;
+		delay_ms(200);	  
+	}
+	led=1;	  	  //已经注册到本地网络	
+}
+
+void send_english(void)
+{
+	clearBuff();	 
+	Print_string(CMGF1); //短消息TEXT模式
+	while(strstr(aa,"OK")==NULL);//如果模块没有响应，等待
+	clearBuff();	 
+	Print_string(message); //短消息发送到具体号码
+	while(strstr(aa,">")==NULL);//如果模块没有响应，等待
+	clearBuff();
+	Print_string("OK");
+	Print_Char(0x1a);
+	while(strstr(aa,"OK")==NULL);//如果模块没有响应，等待		
+}
+void check_message(void)
+{
+	clearBuff();	 
+	Print_string(CMGF1); //短消息TEXT模式
+	while(strstr(aa,"OK")==NULL);//如果模块没有响应，等待
+	clearBuff();	 
+	Print_string(CMGR); //短消息读取
+	while(strstr(aa,"OK")==NULL);//如果模块没有响应，等待
+
+	if(strstr(aa,"18895738116")!=NULL)
+	{
+		if(strstr(aa,"OPEN LIGHT")!=NULL)
+		led=0;
+		else if(strstr(aa,"CLOSE LIGHT")!=NULL)
+		led=1;
+	}
+	clearBuff();
+	Print_string(CMGD); //短消息删除
+	while(strstr(aa,"OK")==NULL);//如果模块没有响应，等待	
+}
+void main(void)
+{
+	led=0;
+	init_uart();			  //初始化串口
+	init_gsm();				  //初始化GSM模块
+	while(1)
+	{
+		if(key1==0)
+		{			
+			delay_ms(10);
+			if(key1==0)
+			{
+				while(!key1);
+				send_english();
+			}
+		}
+
+		if(key2==0)
+		{			
+
+			delay_ms(10);
+			if(key2==0)
+			{
+				while(!key2);
+				Print_string(calling);
+			}
+		}
+
+		if(strstr(aa,"SM")!=NULL)  //如果接收到新消息
+		{			 
+			 check_message();
+			 send_english();//返回OK，表示程序执行完成
+		}
+	}
+		
+}
+
+void ser()interrupt 4	//串行口中断服务程序
+{
+	if(RI)
+	{
+	 	aa[j]=SBUF;
+		RI=0;
+		j++;
+	}
+	flag=1;			
+}
+

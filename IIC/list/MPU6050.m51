@@ -1,0 +1,289 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        10/25/2015  09:37:00  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+D:\KEIL\C51\BIN\BL51.EXE .\output\main.obj TO .\output\MPU6050 PRINT (.\list\MPU6050.m51) RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  .\output\main.obj (MAIN)
+
+
+LINK MAP OF MODULE:  .\output\MPU6050 (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0002H     UNIT         ?DT?_I2C_SENDBYTE?MAIN
+            DATA    000AH     0002H     UNIT         ?DT?I2C_RECVBYTE?MAIN
+            DATA    000CH     0002H     UNIT         ?DT?_SINGLE_WRITEI2C?MAIN
+            DATA    000EH     0002H     UNIT         ?DT?_SINGLE_READI2C?MAIN
+                    0010H     0010H                  *** GAP ***
+            BIT     0020H.0   0000H.1   UNIT         ?BI?I2C_SENDACK?MAIN
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0029H     UNIT         ?PR?I2C_RECVBYTE?MAIN
+            CODE    0029H     0027H     UNIT         ?PR?_SINGLE_READI2C?MAIN
+            CODE    0050H     0023H     UNIT         ?PR?INITMPU6050?MAIN
+            CODE    0073H     0023H     UNIT         ?PR?_I2C_SENDBYTE?MAIN
+            CODE    0096H     0019H     UNIT         ?PR?_SINGLE_WRITEI2C?MAIN
+            CODE    00AFH     000FH     UNIT         ?PR?I2C_START?MAIN
+            CODE    00BEH     000EH     UNIT         ?PR?I2C_SENDACK?MAIN
+            CODE    00CCH     000DH     UNIT         ?PR?I2C_RECVACK?MAIN
+            CODE    00D9H     000CH     UNIT         ?PR?I2C_STOP?MAIN
+
+
+
+OVERLAY MAP OF MODULE:   .\output\MPU6050 (MAIN)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+
+
+UNRESOLVED EXTERNAL SYMBOLS:
+   DELAY5US
+
+
+
+SYMBOL TABLE OF MODULE:  .\output\MPU6050 (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        MAIN
+BL51 BANKED LINKER/LOCATER V6.22                                                      10/25/2015  09:37:00  PAGE 2
+
+
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  C:00CCH         PUBLIC        I2C_RecvACK
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  C:0029H         PUBLIC        _Single_ReadI2C
+  D:00A8H         PUBLIC        IE
+  C:0096H         PUBLIC        _Single_WriteI2C
+  D:00B8H         PUBLIC        IP
+  B:00D0H.7       PUBLIC        CY
+  C:00AFH         PUBLIC        I2C_Start
+  D:0098H         PUBLIC        SCON
+  D:0088H         PUBLIC        TCON
+  C:0073H         PUBLIC        _I2C_SendByte
+  C:00D9H         PUBLIC        I2C_Stop
+  C:0000H         PUBLIC        I2C_RecvByte
+  C:0050H         PUBLIC        InitMPU6050
+  B:0090H.1       PUBLIC        SDA
+  B:0090H.0       PUBLIC        SCL
+  D:00C8H         PUBLIC        T2CON
+  D:00D0H         PUBLIC        PSW
+  C:00BEH         PUBLIC        I2C_SendACK
+  -------         PROC          INITMPU6050
+  C:0050H         LINE#         62
+  C:0050H         LINE#         63
+  C:0050H         LINE#         64
+  C:0057H         LINE#         65
+  C:005EH         LINE#         66
+  C:0065H         LINE#         67
+  C:006CH         LINE#         68
+  -------         ENDPROC       INITMPU6050
+  -------         PROC          I2C_START
+  C:00AFH         LINE#         74
+  C:00AFH         LINE#         75
+  C:00AFH         LINE#         76
+  C:00B1H         LINE#         77
+  C:00B3H         LINE#         78
+  C:00B6H         LINE#         79
+  C:00B8H         LINE#         80
+  C:00BBH         LINE#         81
+  C:00BDH         LINE#         82
+  -------         ENDPROC       I2C_START
+  -------         PROC          I2C_STOP
+  C:00D9H         LINE#         87
+  C:00D9H         LINE#         88
+  C:00D9H         LINE#         89
+  C:00DBH         LINE#         90
+  C:00DDH         LINE#         91
+  C:00E0H         LINE#         92
+  C:00E2H         LINE#         93
+  -------         ENDPROC       I2C_STOP
+  -------         PROC          I2C_SENDACK
+  B:0020H.0       SYMBOL        ack
+  C:00BEH         LINE#         100
+  C:00BEH         LINE#         101
+  C:00BEH         LINE#         102
+  C:00C2H         LINE#         103
+BL51 BANKED LINKER/LOCATER V6.22                                                      10/25/2015  09:37:00  PAGE 3
+
+
+  C:00C4H         LINE#         104
+  C:00C7H         LINE#         105
+  C:00C9H         LINE#         106
+  -------         ENDPROC       I2C_SENDACK
+  -------         PROC          I2C_RECVACK
+  C:00CCH         LINE#         113
+  C:00CCH         LINE#         114
+  C:00CCH         LINE#         115
+  C:00CEH         LINE#         116
+  C:00D1H         LINE#         117
+  C:00D3H         LINE#         118
+  C:00D5H         LINE#         119
+  C:00D8H         LINE#         120
+  C:00D8H         LINE#         121
+  -------         ENDPROC       I2C_RECVACK
+  -------         PROC          _I2C_SENDBYTE
+  D:0008H         SYMBOL        dat
+  -------         DO            
+  D:0009H         SYMBOL        i
+  -------         ENDDO         
+  C:0073H         LINE#         127
+  C:0075H         LINE#         128
+  C:0075H         LINE#         130
+  C:0078H         LINE#         131
+  C:0078H         LINE#         132
+  C:007EH         LINE#         133
+  C:0080H         LINE#         134
+  C:0082H         LINE#         135
+  C:0085H         LINE#         136
+  C:0087H         LINE#         137
+  C:008AH         LINE#         138
+  C:0093H         LINE#         139
+  -------         ENDPROC       _I2C_SENDBYTE
+  -------         PROC          I2C_RECVBYTE
+  -------         DO            
+  D:000AH         SYMBOL        i
+  D:000BH         SYMBOL        dat
+  -------         ENDDO         
+  C:0000H         LINE#         146
+  C:0000H         LINE#         147
+  C:0000H         LINE#         149
+  C:0003H         LINE#         150
+  C:0005H         LINE#         151
+  C:0007H         LINE#         152
+  C:0007H         LINE#         153
+  C:000DH         LINE#         154
+  C:000FH         LINE#         155
+  C:0012H         LINE#         156
+  C:0018H         LINE#         157
+  C:001AH         LINE#         158
+  C:001DH         LINE#         159
+  C:0026H         LINE#         160
+  C:0028H         LINE#         161
+  -------         ENDPROC       I2C_RECVBYTE
+  -------         PROC          _SINGLE_WRITEI2C
+  D:000CH         SYMBOL        REG_Address
+  D:000DH         SYMBOL        REG_data
+BL51 BANKED LINKER/LOCATER V6.22                                                      10/25/2015  09:37:00  PAGE 4
+
+
+  C:0096H         LINE#         166
+  C:009AH         LINE#         167
+  C:009AH         LINE#         168
+  C:009DH         LINE#         169
+  C:00A2H         LINE#         170
+  C:00A7H         LINE#         171
+  C:00ACH         LINE#         172
+  -------         ENDPROC       _SINGLE_WRITEI2C
+  -------         PROC          _SINGLE_READI2C
+  D:000EH         SYMBOL        REG_Address
+  -------         DO            
+  D:000FH         SYMBOL        REG_data
+  -------         ENDDO         
+  C:0029H         LINE#         178
+  C:002BH         LINE#         179
+  C:002BH         LINE#         181
+  C:002EH         LINE#         182
+  C:0033H         LINE#         183
+  C:0038H         LINE#         184
+  C:003BH         LINE#         185
+  C:0040H         LINE#         186
+  C:0045H         LINE#         187
+  C:004AH         LINE#         188
+  C:004DH         LINE#         189
+  C:004FH         LINE#         190
+  -------         ENDPROC       _SINGLE_READI2C
+  -------         ENDMOD        MAIN
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?INITMPU6050?MAIN
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SINGLE_READI2C?MAIN
+
+*** WARNING L10: CANNOT DETERMINE ROOT SEGMENT
+
+*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  DELAY5US
+    MODULE:  .\output\main.obj (MAIN)
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  DELAY5US
+    MODULE:  .\output\main.obj (MAIN)
+    ADDRESS: 00B4H
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  DELAY5US
+    MODULE:  .\output\main.obj (MAIN)
+    ADDRESS: 00B9H
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  DELAY5US
+    MODULE:  .\output\main.obj (MAIN)
+    ADDRESS: 00DEH
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  DELAY5US
+BL51 BANKED LINKER/LOCATER V6.22                                                      10/25/2015  09:37:00  PAGE 5
+
+
+    MODULE:  .\output\main.obj (MAIN)
+    ADDRESS: 00E3H
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  DELAY5US
+    MODULE:  .\output\main.obj (MAIN)
+    ADDRESS: 00C5H
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  DELAY5US
+    MODULE:  .\output\main.obj (MAIN)
+    ADDRESS: 00CAH
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  DELAY5US
+    MODULE:  .\output\main.obj (MAIN)
+    ADDRESS: 00CFH
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  DELAY5US
+    MODULE:  .\output\main.obj (MAIN)
+    ADDRESS: 00D6H
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  DELAY5US
+    MODULE:  .\output\main.obj (MAIN)
+    ADDRESS: 0083H
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  DELAY5US
+    MODULE:  .\output\main.obj (MAIN)
+    ADDRESS: 0088H
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  DELAY5US
+    MODULE:  .\output\main.obj (MAIN)
+    ADDRESS: 0010H
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  DELAY5US
+    MODULE:  .\output\main.obj (MAIN)
+    ADDRESS: 001BH
+
+Program Size: data=16.1 xdata=0 code=229
+LINK/LOCATE RUN COMPLETE.  16 WARNING(S),  0 ERROR(S)

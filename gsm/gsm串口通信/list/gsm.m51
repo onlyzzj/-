@@ -1,0 +1,521 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        04/19/2016  09:04:56  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+D:\KEIL_V5\C51\BIN\BL51.EXE .\output\main.obj, .\output\gsm.obj, .\output\delay.obj TO .\output\gsm PRINT (.\list\gsm.m5
+>> 1) RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  .\output\main.obj (MAIN)
+  .\output\gsm.obj (GSM)
+  .\output\delay.obj (DELAY)
+  D:\KEIL_V5\C51\LIB\C51S.LIB (?C_STARTUP)
+  D:\KEIL_V5\C51\LIB\C51S.LIB (?C?CLDPTR)
+  D:\KEIL_V5\C51\LIB\C51S.LIB (STRSTR)
+  D:\KEIL_V5\C51\LIB\C51S.LIB (?C_INIT)
+
+
+LINK MAP OF MODULE:  .\output\gsm (MAIN)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0052H     UNIT         ?DT?GSM
+            DATA    005AH     000CH     UNIT         _DATA_GROUP_
+            IDATA   0066H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     001EH     UNIT         ?PR?SER?MAIN
+                    0021H     0002H                  *** GAP ***
+            CODE    0023H     0003H     ABSOLUTE     
+            CODE    0026H     0124H     UNIT         ?CO?GSM
+            CODE    014AH     009CH     UNIT         ?PR?INIT_GSM?GSM
+            CODE    01E6H     009BH     UNIT         ?PR?CHECKENGLISH_SENDENGLISH?GSM
+            CODE    0281H     009BH     UNIT         ?PR?CHECKENGLISH_SENDCHINESE?GSM
+            CODE    031CH     009BH     UNIT         ?PR?CHECKCHINESE_SENDENGLISH?GSM
+            CODE    03B7H     009BH     UNIT         ?PR?CHECKCHINESE_SENDCHINESE?GSM
+            CODE    0452H     008CH     UNIT         ?C_C51STARTUP
+            CODE    04DEH     0085H     UNIT         ?PR?SEND_ENGLISH?GSM
+            CODE    0563H     0085H     UNIT         ?PR?SEND_CHINESE?GSM
+            CODE    05E8H     0082H     UNIT         ?PR?_STRSTR?STRSTR
+            CODE    066AH     007BH     UNIT         ?PR?SEND_OVER?GSM
+            CODE    06E5H     005DH     UNIT         ?PR?SEND_CALL1?GSM
+            CODE    0742H     004DH     UNIT         ?PR?SEND_CALL2?GSM
+            CODE    078FH     0030H     UNIT         ?PR?_PRINT_STR?GSM
+            CODE    07BFH     001EH     UNIT         ?PR?_DELAY?DELAY
+            CODE    07DDH     0019H     UNIT         ?PR?INIT_CK?MAIN
+            CODE    07F6H     0019H     UNIT         ?C?LIB_CODE
+            CODE    080FH     0015H     UNIT         ?PR?CLEARBUFF?GSM
+            CODE    0824H     0009H     UNIT         ?PR?MAIN?MAIN
+            CODE    082DH     0008H     UNIT         ?PR?_PRINT_CHAR?GSM
+            CODE    0835H     0007H     UNIT         ?PR?_LED?GSM
+            CODE    083CH     0004H     UNIT         ?C_INITSEG
+
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/19/2016  09:04:56  PAGE 2
+
+
+
+
+OVERLAY MAP OF MODULE:   .\output\gsm (MAIN)
+
+
+SEGMENT                                    DATA_GROUP 
+  +--> CALLED SEGMENT                    START    LENGTH
+--------------------------------------------------------
+?C_C51STARTUP                            -----    -----
+  +--> ?PR?MAIN?MAIN
+  +--> ?C_INITSEG
+
+?PR?MAIN?MAIN                            -----    -----
+  +--> ?PR?INIT_CK?MAIN
+  +--> ?PR?INIT_GSM?GSM
+  +--> ?PR?SEND_CALL1?GSM
+
+?PR?INIT_GSM?GSM                         -----    -----
+  +--> ?PR?CLEARBUFF?GSM
+  +--> ?CO?GSM
+  +--> ?PR?_PRINT_STR?GSM
+  +--> ?PR?_STRSTR?STRSTR
+  +--> ?PR?_LED?GSM
+
+?PR?_PRINT_STR?GSM                       005AH    0003H
+  +--> ?CO?GSM
+  +--> ?PR?_PRINT_CHAR?GSM
+  +--> ?PR?_DELAY?DELAY
+
+?PR?_STRSTR?STRSTR                       005AH    000CH
+
+?PR?SEND_CALL1?GSM                       -----    -----
+  +--> ?PR?CLEARBUFF?GSM
+  +--> ?CO?GSM
+  +--> ?PR?_PRINT_STR?GSM
+  +--> ?PR?_STRSTR?STRSTR
+  +--> ?PR?_LED?GSM
+  +--> ?PR?_DELAY?DELAY
+
+
+
+SYMBOL TABLE OF MODULE:  .\output\gsm (MAIN)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        MAIN
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00B0H         PUBLIC        P3
+  D:00A8H         PUBLIC        IE
+  B:00A8H.4       PUBLIC        ES
+  D:00B8H         PUBLIC        IP
+  B:0098H.0       PUBLIC        RI
+  B:0098H.1       PUBLIC        TI
+  C:0824H         PUBLIC        main
+  D:0099H         PUBLIC        SBUF
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/19/2016  09:04:56  PAGE 3
+
+
+  D:0087H         PUBLIC        PCON
+  D:0098H         PUBLIC        SCON
+  D:0089H         PUBLIC        TMOD
+  D:0088H         PUBLIC        TCON
+  C:0003H         PUBLIC        ser
+  D:008DH         PUBLIC        TH1
+  D:008BH         PUBLIC        TL1
+  B:0088H.6       PUBLIC        TR1
+  C:07DDH         PUBLIC        init_ck
+  D:00C8H         PUBLIC        T2CON
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          INIT_CK
+  C:07DDH         LINE#         5
+  C:07DDH         LINE#         6
+  C:07DDH         LINE#         7
+  C:07E0H         LINE#         9
+  C:07E3H         LINE#         11
+  C:07E6H         LINE#         12
+  C:07E9H         LINE#         13
+  C:07ECH         LINE#         14
+  C:07EFH         LINE#         15
+  C:07F1H         LINE#         16
+  C:07F3H         LINE#         17
+  C:07F5H         LINE#         18
+  -------         ENDPROC       INIT_CK
+  -------         PROC          MAIN
+  C:0824H         LINE#         20
+  C:0824H         LINE#         21
+  C:0824H         LINE#         22
+  C:0827H         LINE#         23
+  C:082AH         LINE#         24
+  -------         ENDPROC       MAIN
+  -------         PROC          SER
+  C:0003H         LINE#         29
+  C:000CH         LINE#         32
+  C:000FH         LINE#         33
+  C:0016H         LINE#         35
+  C:0018H         LINE#         36
+  C:001AH         LINE#         37
+  C:001AH         LINE#         40
+  -------         ENDPROC       SER
+  -------         ENDMOD        MAIN
+
+  -------         MODULE        GSM
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  C:010DH         PUBLIC        SMS_send
+  D:0090H         PUBLIC        P1
+  D:00B0H         PUBLIC        P3
+  C:00EDH         PUBLIC        ATE0
+  D:00A8H         PUBLIC        IE
+  C:080FH         PUBLIC        clearBuff
+  D:00B8H         PUBLIC        IP
+  C:013EH         PUBLIC        CMGD
+  B:0098H.1       PUBLIC        TI
+  C:00F4H         PUBLIC        ATCN
+  C:0132H         PUBLIC        CMGR
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/19/2016  09:04:56  PAGE 4
+
+
+  C:0795H         PUBLIC        _Print_Str
+  D:0099H         PUBLIC        SBUF
+  D:0098H         PUBLIC        SCON
+  D:0088H         PUBLIC        TCON
+  C:0839H         PUBLIC        _led
+  D:0008H         PUBLIC        aa
+  C:066AH         PUBLIC        send_over
+  C:011AH         PUBLIC        CMGF0
+  C:0126H         PUBLIC        CMGF1
+  C:0102H         PUBLIC        CREG_CMD
+  C:03B7H         PUBLIC        checkchinese_sendchinese
+  C:06E5H         PUBLIC        send_call1
+  C:0742H         PUBLIC        send_call2
+  C:014AH         PUBLIC        init_gsm
+  C:031CH         PUBLIC        checkchinese_sendenglish
+  C:0281H         PUBLIC        checkenglish_sendchinese
+  D:00C8H         PUBLIC        T2CON
+  D:0059H         PUBLIC        j
+  C:01E6H         PUBLIC        checkenglish_sendenglish
+  C:082DH         PUBLIC        _Print_Char
+  C:0563H         PUBLIC        send_chinese
+  D:00D0H         PUBLIC        PSW
+  C:04DEH         PUBLIC        send_english
+  -------         PROC          SEND_ENGLISH
+  C:04DEH         LINE#         25
+  C:04DEH         LINE#         26
+  C:04DEH         LINE#         27
+  C:04E1H         LINE#         28
+  C:04E4H         LINE#         29
+  C:04EDH         LINE#         30
+  C:0504H         LINE#         31
+  C:0507H         LINE#         32
+  C:050AH         LINE#         33
+  C:0513H         LINE#         34
+  C:052AH         LINE#         35
+  C:0531H         LINE#         36
+  C:0534H         LINE#         37
+  C:053DH         LINE#         38
+  C:0542H         LINE#         39
+  C:0559H         LINE#         40
+  C:0560H         LINE#         41
+  -------         ENDPROC       SEND_ENGLISH
+  -------         PROC          SEND_CHINESE
+  C:0563H         LINE#         45
+  C:0563H         LINE#         46
+  C:0563H         LINE#         47
+  C:0566H         LINE#         48
+  C:0569H         LINE#         49
+  C:0572H         LINE#         50
+  C:0589H         LINE#         51
+  C:058CH         LINE#         52
+  C:058FH         LINE#         53
+  C:0598H         LINE#         54
+  C:05AFH         LINE#         55
+  C:05B6H         LINE#         56
+  C:05B9H         LINE#         57
+  C:05C2H         LINE#         58
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/19/2016  09:04:56  PAGE 5
+
+
+  C:05C7H         LINE#         59
+  C:05DEH         LINE#         60
+  C:05E5H         LINE#         61
+  -------         ENDPROC       SEND_CHINESE
+  -------         PROC          CHECKENGLISH_SENDENGLISH
+  C:01E6H         LINE#         65
+  C:01E6H         LINE#         66
+  C:01E6H         LINE#         67
+  C:01E9H         LINE#         68
+  C:01ECH         LINE#         69
+  C:0203H         LINE#         70
+  C:0206H         LINE#         71
+  C:0209H         LINE#         72
+  C:0212H         LINE#         73
+  C:0229H         LINE#         74
+  C:0230H         LINE#         75
+  C:0233H         LINE#         76
+  C:0236H         LINE#         77
+  C:024DH         LINE#         78
+  C:0254H         LINE#         79
+  C:0257H         LINE#         80
+  C:0260H         LINE#         81
+  C:0277H         LINE#         82
+  C:027EH         LINE#         83
+  -------         ENDPROC       CHECKENGLISH_SENDENGLISH
+  -------         PROC          CHECKENGLISH_SENDCHINESE
+  C:0281H         LINE#         87
+  C:0281H         LINE#         88
+  C:0281H         LINE#         89
+  C:0284H         LINE#         90
+  C:0287H         LINE#         91
+  C:029EH         LINE#         92
+  C:02A1H         LINE#         93
+  C:02A4H         LINE#         94
+  C:02ADH         LINE#         95
+  C:02C4H         LINE#         96
+  C:02CBH         LINE#         97
+  C:02CEH         LINE#         98
+  C:02D1H         LINE#         99
+  C:02E8H         LINE#         100
+  C:02EFH         LINE#         101
+  C:02F2H         LINE#         102
+  C:02FBH         LINE#         103
+  C:0312H         LINE#         104
+  C:0319H         LINE#         105
+  -------         ENDPROC       CHECKENGLISH_SENDCHINESE
+  -------         PROC          CHECKCHINESE_SENDENGLISH
+  C:031CH         LINE#         109
+  C:031CH         LINE#         110
+  C:031CH         LINE#         111
+  C:031FH         LINE#         112
+  C:0322H         LINE#         113
+  C:0339H         LINE#         114
+  C:033CH         LINE#         115
+  C:033FH         LINE#         116
+  C:0348H         LINE#         117
+  C:035FH         LINE#         118
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/19/2016  09:04:56  PAGE 6
+
+
+  C:0366H         LINE#         119
+  C:0369H         LINE#         120
+  C:036CH         LINE#         121
+  C:0383H         LINE#         122
+  C:038AH         LINE#         123
+  C:038DH         LINE#         124
+  C:0396H         LINE#         125
+  C:03ADH         LINE#         126
+  C:03B4H         LINE#         127
+  -------         ENDPROC       CHECKCHINESE_SENDENGLISH
+  -------         PROC          CHECKCHINESE_SENDCHINESE
+  C:03B7H         LINE#         131
+  C:03B7H         LINE#         132
+  C:03B7H         LINE#         133
+  C:03BAH         LINE#         134
+  C:03BDH         LINE#         135
+  C:03D4H         LINE#         136
+  C:03D7H         LINE#         137
+  C:03DAH         LINE#         138
+  C:03E3H         LINE#         139
+  C:03FAH         LINE#         140
+  C:0401H         LINE#         141
+  C:0404H         LINE#         142
+  C:0407H         LINE#         143
+  C:041EH         LINE#         144
+  C:0425H         LINE#         145
+  C:0428H         LINE#         146
+  C:0431H         LINE#         147
+  C:0448H         LINE#         148
+  C:044FH         LINE#         149
+  -------         ENDPROC       CHECKCHINESE_SENDCHINESE
+  -------         PROC          SEND_CALL1
+  C:06E5H         LINE#         153
+  C:06E5H         LINE#         154
+  C:06E5H         LINE#         155
+  C:06E8H         LINE#         156
+  C:06EBH         LINE#         157
+  C:06F4H         LINE#         158
+  C:070BH         LINE#         159
+  C:070EH         LINE#         160
+  C:0711H         LINE#         161
+  C:0718H         LINE#         162
+  C:0721H         LINE#         163
+  C:0738H         LINE#         164
+  C:073FH         LINE#         165
+  -------         ENDPROC       SEND_CALL1
+  -------         PROC          SEND_CALL2
+  C:0742H         LINE#         169
+  C:0742H         LINE#         170
+  C:0742H         LINE#         171
+  C:0745H         LINE#         172
+  C:0748H         LINE#         173
+  C:0751H         LINE#         174
+  C:0758H         LINE#         175
+  C:075BH         LINE#         176
+  C:075EH         LINE#         177
+  C:0765H         LINE#         178
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/19/2016  09:04:56  PAGE 7
+
+
+  C:076EH         LINE#         179
+  C:0785H         LINE#         180
+  C:078CH         LINE#         181
+  -------         ENDPROC       SEND_CALL2
+  -------         PROC          SEND_OVER
+  C:066AH         LINE#         184
+  C:066AH         LINE#         185
+  C:066AH         LINE#         186
+  C:066DH         LINE#         187
+  C:0670H         LINE#         188
+  C:0687H         LINE#         189
+  C:068AH         LINE#         190
+  C:0693H         LINE#         191
+  C:06AAH         LINE#         192
+  C:06B1H         LINE#         193
+  C:06B4H         LINE#         194
+  C:06BBH         LINE#         195
+  C:06C4H         LINE#         196
+  C:06DBH         LINE#         197
+  C:06E2H         LINE#         198
+  -------         ENDPROC       SEND_OVER
+  -------         PROC          _PRINT_CHAR
+  D:0007H         SYMBOL        ch
+  C:082DH         LINE#         202
+  C:082DH         LINE#         203
+  C:082DH         LINE#         204
+  C:082FH         LINE#         205
+  C:0832H         LINE#         206
+  C:0834H         LINE#         207
+  -------         ENDPROC       _PRINT_CHAR
+  C:078FH         SYMBOL        L?0125
+  -------         PROC          L?0124
+  -------         ENDPROC       L?0124
+  C:078FH         SYMBOL        L?0125
+  -------         PROC          _PRINT_STR
+  D:005AH         SYMBOL        str
+  C:0795H         LINE#         210
+  C:079BH         LINE#         211
+  C:079BH         LINE#         212
+  C:07A7H         LINE#         213
+  C:07A7H         LINE#         214
+  C:07AAH         LINE#         215
+  C:07B1H         LINE#         216
+  C:07BCH         LINE#         217
+  C:07BEH         LINE#         219
+  -------         ENDPROC       _PRINT_STR
+  -------         PROC          CLEARBUFF
+  C:080FH         LINE#         222
+  C:080FH         LINE#         223
+  C:080FH         LINE#         224
+  C:0812H         LINE#         225
+  C:0812H         LINE#         226
+  C:0819H         LINE#         227
+  C:0820H         LINE#         228
+  C:0823H         LINE#         229
+  -------         ENDPROC       CLEARBUFF
+  C:0835H         SYMBOL        L?0123
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/19/2016  09:04:56  PAGE 8
+
+
+  -------         PROC          L?0122
+  -------         ENDPROC       L?0122
+  C:0835H         SYMBOL        L?0123
+  -------         PROC          _LED
+  D:0006H         SYMBOL        i
+  C:0839H         LINE#         232
+  C:0839H         LINE#         233
+  C:0839H         LINE#         241
+  C:083BH         LINE#         242
+  -------         ENDPROC       _LED
+  -------         PROC          INIT_GSM
+  C:014AH         LINE#         245
+  C:014AH         LINE#         246
+  C:014AH         LINE#         247
+  C:014DH         LINE#         248
+  C:0156H         LINE#         249
+  C:016DH         LINE#         250
+  C:0174H         LINE#         251
+  C:0177H         LINE#         252
+  C:0180H         LINE#         253
+  C:0197H         LINE#         254
+  C:0199H         LINE#         255
+  C:019BH         LINE#         256
+  C:019BH         LINE#         257
+  C:019BH         LINE#         258
+  C:01A4H         LINE#         259
+  C:01BBH         LINE#         260
+  C:01D0H         LINE#         261
+  C:01D0H         LINE#         262
+  C:01D7H         LINE#         263
+  C:01DAH         LINE#         264
+  C:01DAH         LINE#         265
+  C:01DAH         LINE#         267
+  C:01DAH         LINE#         268
+  C:01E1H         LINE#         269
+  C:01E4H         LINE#         270
+  C:01E4H         LINE#         271
+  -------         ENDPROC       INIT_GSM
+  -------         ENDMOD        GSM
+
+  -------         MODULE        DELAY
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00B0H         PUBLIC        P3
+  D:00A8H         PUBLIC        IE
+  C:07BFH         PUBLIC        _delay
+  D:00B8H         PUBLIC        IP
+  D:0098H         PUBLIC        SCON
+  D:0088H         PUBLIC        TCON
+  D:00C8H         PUBLIC        T2CON
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          _DELAY
+  D:0006H         SYMBOL        xms
+  -------         DO            
+  D:0006H         SYMBOL        i
+  D:0004H         SYMBOL        j
+  -------         ENDDO         
+BL51 BANKED LINKER/LOCATER V6.22                                                      04/19/2016  09:04:56  PAGE 9
+
+
+  C:07BFH         LINE#         2
+  C:07BFH         LINE#         3
+  C:07BFH         LINE#         5
+  C:07C8H         LINE#         6
+  C:07DCH         LINE#         7
+  -------         ENDPROC       _DELAY
+  -------         ENDMOD        DELAY
+
+  -------         MODULE        ?C?CLDPTR
+  C:07F6H         PUBLIC        ?C?CLDPTR
+  -------         ENDMOD        ?C?CLDPTR
+
+  -------         MODULE        STRSTR
+  D:005AH         PUBLIC        ?_strstr?BYTE
+  C:05E8H         PUBLIC        _strstr
+  -------         ENDMOD        STRSTR
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?CHECKENGLISH_SENDENGLISH?GSM
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?CHECKENGLISH_SENDCHINESE?GSM
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?CHECKCHINESE_SENDENGLISH?GSM
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?CHECKCHINESE_SENDCHINESE?GSM
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?SEND_CALL2?GSM
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?SEND_OVER?GSM
+
+Program Size: data=103.0 xdata=0 code=2110
+LINK/LOCATE RUN COMPLETE.  6 WARNING(S),  0 ERROR(S)
