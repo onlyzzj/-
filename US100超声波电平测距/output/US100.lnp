@@ -1,0 +1,6 @@
+".\output\main.obj",
+".\output\delay.obj",
+".\output\us100.obj",
+".\output\lcd1602.obj" 
+TO ".\output\US100" 
+PRINT(".\list\US100.m51") RAMSIZE(256) 
