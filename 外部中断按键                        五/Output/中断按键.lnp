@@ -1,0 +1,6 @@
+".\Output\main.obj",
+".\Output\delay.obj",
+".\Output\key.obj",
+".\Output\led.obj" 
+TO ".\Output\中断按键" 
+PRINT(".\List\中断按键.m51") RAMSIZE(256) 

@@ -1,0 +1,192 @@
+C51 COMPILER V9.54   LED                                                                   04/14/2016 18:12:39 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE LED
+OBJECT MODULE PLACED IN .\Output\led.obj
+COMPILER INVOKED BY: D:\Keil_v5\C51\BIN\C51.EXE led.c BROWSE DEBUG OBJECTEXTEND PRINT(.\List\led.lst) TABS(2) OBJECT(.\O
+                    -utput\led.obj)
+
+line level    source
+
+   1          #include  "led.h"
+   2          #include  "delay.h"
+   3          int i;
+   4          uint j;
+   5          uchar code shumaguan[]={0xc0,0xf9,0xa4,0xb0,0x99,0x92,0x82,0xf8,0x80,0x98};
+   6          
+   7          
+   8          
+   9          
+  10          void diyigeliang(void)
+  11          {
+  12   1       led=0;
+  13   1      }
+  14          
+  15          
+  16          void shanshuo1(void)
+  17          { 
+  18   1        led=0;
+  19   1        i=-30000;
+  20   1        while(i++);
+  21   1        led=1;
+  22   1        i=-30000;
+  23   1        while(i++);
+  24   1      }
+  25          
+  26          
+  27          
+  28          
+  29          void shanshuo2(void)
+  30          {
+  31   1        led=0;
+  32   1        i=50000;
+  33   1        while(i--);
+  34   1        led=1;
+  35   1        i=50000;
+  36   1        while(i--);
+  37   1      }
+  38          
+  39          void shanshuo3(void)
+  40          {
+  41   1        led=0;
+  42   1        for(j=50000;j>0;j--);
+  43   1        led=1;
+  44   1          for(j=50000;j>0;j--);
+  45   1      }
+  46          
+  47          
+  48          
+  49          void shanshuo4(void)
+  50          {
+  51   1        led=0;
+  52   1        delayms(500);
+  53   1        led=1;
+  54   1          delayms(500);
+C51 COMPILER V9.54   LED                                                                   04/14/2016 18:12:39 PAGE 2   
+
+  55   1      }
+  56          
+  57          
+  58          
+  59          
+  60          void liushuideng1(void)
+  61          {
+  62   1        P0=0xfe;
+  63   1        for(i=8;i>0;i--)
+  64   1        { 
+  65   2          delayms(500);
+  66   2          P0=(P0<<1)+1;
+  67   2        } 
+  68   1      }
+  69          
+  70          
+  71          
+  72          void liushuideng2(void)
+  73          {
+  74   1        uchar a,b;
+  75   1        P0=0xfe;
+  76   1        for(i=0;i<7;i++)
+  77   1        {
+  78   2          delayms(200);
+  79   2          a=P0<<1;
+  80   2          b=P0>>7;
+  81   2          P0=a|b;
+  82   2          delayms(200);
+  83   2        }
+  84   1      }
+  85          
+  86          
+  87          
+  88          void shumaguan__jt(void)
+  89          {
+  90   1        wei1=0;
+  91   1        wei2=0;
+  92   1        wei3=0;
+  93   1        wei4=0;
+  94   1        duanxuan=shumaguan[7];
+  95   1      
+  96   1      }
+  97          
+  98          
+  99          
+ 100          
+ 101          
+ 102          void shumaguan__dt(void)
+ 103          {
+ 104   1        wei1=0;
+ 105   1        wei2=1;
+ 106   1        wei3=1;
+ 107   1        wei4=1;
+ 108   1        duanxuan=shumaguan[1];
+ 109   1        delayms(1);
+ 110   1        wei1=1;
+ 111   1        wei2=0;
+ 112   1        wei3=1;
+ 113   1        wei4=1;
+ 114   1        duanxuan=shumaguan[2];
+ 115   1        delayms(1);
+ 116   1        wei1=1;
+C51 COMPILER V9.54   LED                                                                   04/14/2016 18:12:39 PAGE 3   
+
+ 117   1        wei2=1;
+ 118   1        wei3=0;
+ 119   1        wei4=1;
+ 120   1        duanxuan=shumaguan[3];
+ 121   1        delayms(1);
+ 122   1        wei1=1;
+ 123   1        wei2=1;
+ 124   1        wei3=1;
+ 125   1        wei4=0;
+ 126   1        duanxuan=shumaguan[4];
+ 127   1        delayms(1);
+ 128   1      }
+ 129          
+ 130          
+ 131          
+ 132          
+ 133          
+ 134          void shumaguan__dtx(uint num)
+ 135          {        
+ 136   1        uchar g,s,b,q;
+ 137   1        g=num%10,s=num/10%10,b=num/100%10,q=num/1000;
+ 138   1        wei1=0;
+ 139   1        wei2=1;
+ 140   1        wei3=1;
+ 141   1        wei4=1;
+ 142   1        duanxuan=shumaguan[q];
+ 143   1        delayms(1);
+ 144   1        wei1=1;
+ 145   1        wei2=0;
+ 146   1        wei3=1;
+ 147   1        wei4=1;
+ 148   1        duanxuan=shumaguan[b];
+ 149   1        delayms(1);
+ 150   1        wei1=1;
+ 151   1        wei2=1;
+ 152   1        wei3=0;
+ 153   1        wei4=1;
+ 154   1        duanxuan=shumaguan[s];
+ 155   1        delayms(1);
+ 156   1        wei1=1;
+ 157   1        wei2=1;
+ 158   1        wei3=1;
+ 159   1        wei4=0;
+ 160   1        duanxuan=shumaguan[g];
+ 161   1        delayms(1);
+ 162   1      
+ 163   1      
+ 164   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    520    ----
+   CONSTANT SIZE    =     10    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      4       5
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

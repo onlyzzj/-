@@ -1,0 +1,6 @@
+".\Output\main.obj",
+".\Output\led.obj",
+".\Output\delay.obj",
+".\Output\key.obj" 
+TO ".\Output\数码管程序" 
+PRINT(".\List\数码管程序.m51") RAMSIZE(256) 
