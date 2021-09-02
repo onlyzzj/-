@@ -1,0 +1,89 @@
+C51 COMPILER V9.54   LCD12864                                                              03/27/2017 16:56:56 PAGE 1   
+
+
+C51 COMPILER V9.54, COMPILATION OF MODULE LCD12864
+OBJECT MODULE PLACED IN .\output\lcd12864.obj
+COMPILER INVOKED BY: D:\Keil_v5\C51\BIN\C51.EXE lcd12864.c BROWSE DEBUG OBJECTEXTEND PRINT(.\list\lcd12864.lst) TABS(2) 
+                    -OBJECT(.\output\lcd12864.obj)
+
+line level    source
+
+   1          #include "lcd12864.h"
+   2          #include "delay.h"
+   3          
+   4          
+   5          void write_com(uchar com)//写命令
+   6          {
+   7   1        rs=0;//写命令
+   8   1        rw=0;//写操作
+   9   1        en=1; //下降沿写入数据
+  10   1        DATAPORT=com;//写命令数据
+  11   1        delayms(5);//等待数据稳定
+  12   1        en=0;
+  13   1      }
+  14          
+  15          
+  16          void write_data(uchar dat)//写数据
+  17          {
+  18   1        rs=1;//写数据
+  19   1        rw=0;//写操作
+  20   1        en=1; //下降沿写入数据
+  21   1        DATAPORT=dat;//写数据数据
+  22   1        delayms(5);//等待数据稳定
+  23   1        en=0;
+  24   1      }
+  25          
+  26          
+  27          void init_lcd12864(void)//初始化
+  28          {
+  29   1      //  beiguang=1;
+  30   1        PSB=1;            //选择并行
+  31   1        write_com(0x30);  //基本设置
+  32   1        delayms(5); 
+  33   1        write_com(0x0c);  //显示开,游标关
+  34   1        delayms(5);
+  35   1        write_com(0x01);  //显示清零
+  36   1        delayms(5);   
+  37   1      }
+  38          
+  39          
+  40          void write_string(uchar x,uchar y,char *z)
+  41          {
+  42   1        if(y==0)
+  43   1        {
+  44   2          write_com(0x80+x);
+  45   2        }
+  46   1        else if(y==1) 
+  47   1        {
+  48   2          write_com(0x90+x);  
+  49   2        }
+  50   1        else if(y==2) 
+  51   1        {
+  52   2          write_com(0x88+x);  
+  53   2        }
+  54   1        else if(y==3) 
+C51 COMPILER V9.54   LCD12864                                                              03/27/2017 16:56:56 PAGE 2   
+
+  55   1        {
+  56   2          write_com(0x98+x);  
+  57   2        }
+  58   1        while(*z)
+  59   1        {
+  60   2          write_data(*z);
+  61   2          z++;
+  62   2        }
+  63   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    158    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       5
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

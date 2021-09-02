@@ -1,0 +1,7 @@
+".\output\main.obj",
+".\output\delay.obj",
+".\output\key.obj",
+".\output\lcd12864.obj",
+".\output\led.obj" 
+TO ".\output\12864“∫æß ±÷”" 
+PRINT(".\list\12864“∫æß ±÷”.m51") RAMSIZE(256) 
