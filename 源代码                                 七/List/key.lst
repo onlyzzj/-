@@ -1,0 +1,166 @@
+C51 COMPILER V9.00   KEY                                                                   12/21/2014 21:53:58 PAGE 1   
+
+
+C51 COMPILER V9.00, COMPILATION OF MODULE KEY
+OBJECT MODULE PLACED IN .\Output\key.obj
+COMPILER INVOKED BY: d:\Keil\C51\BIN\C51.EXE key.c BROWSE DEBUG OBJECTEXTEND PRINT(.\List\key.lst) OBJECT(.\Output\key.o
+                    -bj)
+
+line level    source
+
+   1          #include"key.h"
+   2          #include"delay.h"
+   3          #include  "led.h"
+   4          #include "lcd1602.h"
+   5          #include <stdio.h>
+   6          
+   7          
+   8          uchar key1num=0;
+   9          uchar temp[16];
+  10          int miao=56,fen=59,shi=23;
+  11          
+  12          
+  13          
+  14          void key(void)
+  15          {
+  16   1              if(key1==0)//调节时间功能键
+  17   1              {
+  18   2                      delayms(10);//消抖
+  19   2                      if(key1==0)
+  20   2                      {
+  21   3                              jiao=0;
+  22   3                              while(!key1);//等待松手
+  23   3                              jiao=1;
+  24   3                              key1num++;
+  25   3                              if(key1num>=4)
+  26   3                                      key1num=0;
+  27   3                              switch(key1num)
+  28   3                              {
+  29   4                                      case 0: TR0=1; write_com(0x0c); break;
+  30   4                                      case 1: TR0=0; write_com(0x0f); write_com(0x80+0x4a); break;
+  31   4                                      case 2: write_com(0x80+0x47); break;                    
+  32   4                                      case 3: write_com(0x80+0x44); break;
+  33   4                              }
+  34   3                      }        
+  35   2              }
+  36   1              if (key2==0)//时间加
+  37   1              {
+  38   2                      delayms(10);//消抖
+  39   2                      if(key2==0)
+  40   2                      {
+  41   3                              jiao=0;
+  42   3                              while(!key2);//等待松手
+  43   3                              jiao=1;
+  44   3                              switch (key1num)
+  45   3                              {
+  46   4                                      case 1:miao++;
+  47   4                                                 if (miao>=60) 
+  48   4                                                 miao=0; 
+  49   4                                                 sprintf(temp,"%.2d",miao);
+  50   4                                             write_string(9,1,temp);
+  51   4                                                 sprintf(temp+3,"%.2d",fen);
+  52   4                                                 write_string(6,1,temp+3);
+  53   4                                                 sprintf(temp+6,"%.2d",shi);
+  54   4                                                 write_string(3,1,temp+6);
+C51 COMPILER V9.00   KEY                                                                   12/21/2014 21:53:58 PAGE 2   
+
+  55   4                                                 write_com(0x80+0x4a);
+  56   4                                                 break;
+  57   4                                      case 2:fen++;
+  58   4                                                 if (fen>=60) 
+  59   4                                                 fen=0;                                          
+  60   4                                                 sprintf(temp,"%.2d",miao);
+  61   4                                             write_string(9,1,temp);
+  62   4                                                 sprintf(temp+3,"%.2d",fen);
+  63   4                                                 write_string(6,1,temp+3);
+  64   4                                                 sprintf(temp+6,"%.2d",shi);
+  65   4                                                 write_string(3,1,temp+6);
+  66   4                                                 write_com(0x80+0x47);
+  67   4                                                 break;
+  68   4                                      case 3:shi++;
+  69   4                                                 if (shi>=24) 
+  70   4                                                 shi=0;                                         
+  71   4                                                 sprintf(temp,"%.2d",miao);
+  72   4                                             write_string(9,1,temp);
+  73   4                                                 sprintf(temp+3,"%.2d",fen);
+  74   4                                                 write_string(6,1,temp+3);
+  75   4                                                 sprintf(temp+6,"%.2d",shi);
+  76   4                                                 write_string(3,1,temp+6);
+  77   4                                                 write_com(0x80+0x44);
+  78   4                                                 break;       
+  79   4                          }
+  80   3               }
+  81   2              }
+  82   1              if(key3==0)//时间减
+  83   1              {
+  84   2                      delayms(10);//消抖
+  85   2                      if(key3==0)
+  86   2                      {
+  87   3                              jiao=0;
+  88   3                              while(!key3);//等待松手
+  89   3                              jiao=1;
+  90   3                              switch (key1num)
+  91   3                              {
+  92   4                                      case 1:miao--;
+  93   4                                                 if (miao<0) 
+  94   4                                                 miao=59; 
+  95   4                                                 sprintf(temp,"%.2d",miao);
+  96   4                                             write_string(9,1,temp);
+  97   4                                                 sprintf(temp+3,"%.2d",fen);
+  98   4                                                 write_string(6,1,temp+3);
+  99   4                                                 sprintf(temp+6,"%.2d",shi);
+ 100   4                                                 write_string(3,1,temp+6);
+ 101   4                                                 write_com(0x80+0x4a);
+ 102   4                                                 break;
+ 103   4                                      case 2:fen--;
+ 104   4                                                 if (fen<0) 
+ 105   4                                                 fen=59;                                         
+ 106   4                                                 sprintf(temp,"%.2d",miao);
+ 107   4                                             write_string(9,1,temp);
+ 108   4                                                 sprintf(temp+3,"%.2d",fen);
+ 109   4                                                 write_string(6,1,temp+3);
+ 110   4                                                 sprintf(temp+6,"%.2d",shi);
+ 111   4                                                 write_string(3,1,temp+6);
+ 112   4                                                 write_com(0x80+0x47);
+ 113   4                                                 break;
+ 114   4                                      case 3:shi--;
+ 115   4                                                 if (shi<0) 
+ 116   4                                                 shi=23;                                        
+C51 COMPILER V9.00   KEY                                                                   12/21/2014 21:53:58 PAGE 3   
+
+ 117   4                                                 sprintf(temp,"%.2d",miao);
+ 118   4                                             write_string(9,1,temp);
+ 119   4                                                 sprintf(temp+3,"%.2d",fen);
+ 120   4                                                 write_string(6,1,temp+3);
+ 121   4                                                 sprintf(temp+6,"%.2d",shi);
+ 122   4                                                 write_string(3,1,temp+6);
+ 123   4                                                 write_com(0x80+0x44);
+ 124   4                                                 break;
+ 125   4                          }   
+ 126   3                      }
+ 127   2              }               
+ 128   1              if(key4==0)
+ 129   1              {
+ 130   2                      delayms(10);//消抖
+ 131   2                      if(key4==0)
+ 132   2                      {
+ 133   3                              jiao=0;
+ 134   3                              while(!key4);//等待松手
+ 135   3                              jiao=1;
+ 136   3                      }
+ 137   2              }
+ 138   1      }                        
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   1027    ----
+   CONSTANT SIZE    =      5    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     23    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

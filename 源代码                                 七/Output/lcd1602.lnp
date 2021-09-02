@@ -1,0 +1,7 @@
+".\Output\lcd1602.obj",
+".\Output\main.obj",
+".\Output\delay.obj",
+".\Output\key.obj",
+".\Output\led.obj" 
+TO ".\Output\lcd1602" 
+PRINT(".\List\lcd1602.m51") RAMSIZE(256) 
