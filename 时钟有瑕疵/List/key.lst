@@ -1,0 +1,344 @@
+C51 COMPILER V9.00   KEY                                                                   12/30/2014 22:19:31 PAGE 1   
+
+
+C51 COMPILER V9.00, COMPILATION OF MODULE KEY
+OBJECT MODULE PLACED IN .\Output\key.obj
+COMPILER INVOKED BY: d:\Keil\C51\BIN\C51.EXE key.c BROWSE DEBUG OBJECTEXTEND PRINT(.\List\key.lst) OBJECT(.\Output\key.o
+                    -bj)
+
+line level    source
+
+   1          #include"key.h"
+   2          #include"delay.h"
+   3          #include "lcd1602.h"
+   4          #include <stdio.h>
+   5          
+   6          uchar xri;
+   7          uchar key1num=0;
+   8          uchar key4num=0;
+   9          uchar flag=-1;
+  10          uchar temp[40];
+  11          int miao=56,fen=59,shi=6,nian=19,yue=12,ri=22;
+  12          int xmiao=0,xfen=0,xshi=0;
+  13          int x=0,y=0,z=0;
+  14          
+  15          
+  16          
+  17          void key(void)
+  18          {
+  19   1              if(key1==0)//调节时间功能键
+  20   1              {
+  21   2                      delayms(10);//消抖
+  22   2                      if(key1==0)
+  23   2                      {
+  24   3      //                      jiao=0;
+  25   3                              while(!key1);//等待松手
+  26   3                              jiao=1;
+  27   3                              key1num++;
+  28   3                              if(key1num>=7)
+  29   3                                      key1num=0;
+  30   3                              if(key4num==0)
+  31   3                              {
+  32   4                                      switch(key1num)
+  33   4                                      {
+  34   5                                              case 0: TR0=1; write_com(0x0c); break;
+  35   5                                              case 1: TR0=0; write_com(0x0f); write_com(0x80+0x4b); break;
+  36   5                                              case 2: write_com(0x80+0x48); break;                    
+  37   5                                              case 3: write_com(0x80+0x45); break;
+  38   5                                              case 4: write_com(0x80+0x05); break;                    
+  39   5                                              case 5: write_com(0x80+0x08); break;
+  40   5                                              case 6: write_com(0x80+0x0b); break;
+  41   5                                      }
+  42   4                              }
+  43   3                              if(key4num==1)
+  44   3                              {
+  45   4                                      switch(key1num)
+  46   4                                      {
+  47   5                                              case 0: TR0=1; write_com(0x0c); break;
+  48   5                                              case 1: write_com(0x0f); write_com(0x80+0x4b); break;
+  49   5                                              case 2: write_com(0x80+0x48); break;                    
+  50   5                                              case 3: write_com(0x80+0x45); break;
+  51   5                                              case 4: write_com(0x80+0x05); break;                    
+  52   5                                              case 5: write_com(0x80+0x08); break;
+  53   5                                              case 6: write_com(0x80+0x0b); break;
+  54   5                                      }
+C51 COMPILER V9.00   KEY                                                                   12/30/2014 22:19:31 PAGE 2   
+
+  55   4                              }
+  56   3                      }        
+  57   2              }
+  58   1              if(key4==0)//调节闹钟功能键
+  59   1              {
+  60   2                      delayms(10);//消抖
+  61   2                      if(key4==0)
+  62   2                      {
+  63   3      //                      jiao=0;
+  64   3                              while(!key4);//等待松手
+  65   3                              jiao=1;
+  66   3                              key4num++;
+  67   3                              if(key4num>1)
+  68   3                                      key4num=0;
+  69   3                      }        
+  70   2              }
+  71   1              if (key2==0)//时间加
+  72   1              {
+  73   2                      delayms(10);//消抖
+  74   2                      if(key2==0)
+  75   2                      {
+  76   3      //                      jiao=0;
+  77   3                              while(!key2);//等待松手
+  78   3                              jiao=1;
+  79   3                              if(key4num==0)
+  80   3                              {
+  81   4                                      switch (key1num)
+  82   4                                      {
+  83   5                                              case 1:miao++;
+  84   5                                                         if (miao>=60) 
+  85   5                                                         miao=0; 
+  86   5                                                         sprintf(temp,"%02d",miao);
+  87   5                                                     write_string(10,1,temp);
+  88   5                                                         write_com(0x80+0x4b);
+  89   5                                                         break;
+  90   5                                              case 2:fen++;
+  91   5                                                         if (fen>=60) 
+  92   5                                                         fen=0;                                          
+  93   5                                                         sprintf(temp+3,"%02d",fen);
+  94   5                                                         write_string(7,1,temp+3);
+  95   5                                                         write_com(0x80+0x48);
+  96   5                                                         break;
+  97   5                                              case 3:shi++;
+  98   5                                                         if (shi>=24) 
+  99   5                                                         shi=0;                                         
+ 100   5                                                         sprintf(temp+6,"%02d",shi);
+ 101   5                                                         write_string(4,1,temp+6);
+ 102   5                                                         write_com(0x80+0x45);
+ 103   5                                                         break;
+ 104   5                              case 4:nian++;
+ 105   5                                                         sprintf(temp+9,"%04d",nian);
+ 106   5                                                         write_string(2,0,temp+9);
+ 107   5                                                         write_com(0x80+0x05);
+ 108   5                                                         break;
+ 109   5                                              case 5:yue++;
+ 110   5                                                         if (yue>12) 
+ 111   5                                                         yue=1;
+ 112   5                                                     sprintf(temp+12,"%02d",yue);
+ 113   5                                                         write_string(7,0,temp+12);
+ 114   5                                                         write_com(0x80+0x08);
+ 115   5                                                         break;
+ 116   5                                              case 6:if((nian%400==0)||(nian%4==0&&nian%100!=0))
+C51 COMPILER V9.00   KEY                                                                   12/30/2014 22:19:31 PAGE 3   
+
+ 117   5                                                     {
+ 118   6                                                                      if(yue==2) xri=29;
+ 119   6                                                         }
+ 120   5                                                         else
+ 121   5                                                         {
+ 122   6                                                                  if(yue==2) xri=28;
+ 123   6                                                         }
+ 124   5                                                         if(yue==1||yue==3||yue==5||yue==7||yue==8||yue==10||yue==12) xri=31;
+ 125   5                                                         if(yue==4||yue==6||yue==9||yue==11) xri=30;   
+ 126   5                                                         ri++;        
+ 127   5                                                         if (ri>xri) 
+ 128   5                                                         ri=1;                                          
+ 129   5                                                 sprintf(temp+15,"%02d",ri);
+ 130   5                                                 write_string(10,0,temp+15);
+ 131   5                                                         write_com(0x80+0x0b);
+ 132   5                                                         break;               
+ 133   5                                  }
+ 134   4                              }
+ 135   3                              if(key4num==1)
+ 136   3                              {
+ 137   4                              switch (key1num)
+ 138   4                                      {
+ 139   5                                              case 1:xmiao++;
+ 140   5                                                         if (xmiao>=60) 
+ 141   5                                                         xmiao=0; 
+ 142   5                                                         sprintf(temp+18,"%02d",xmiao);
+ 143   5                                                     write_string(10,1,temp+18);
+ 144   5                                                         write_com(0x80+0x4b);
+ 145   5                                                         break;
+ 146   5                                              case 2:xfen++;
+ 147   5                                                         if (xfen>=60) 
+ 148   5                                                         xfen=0;                                         
+ 149   5                                                         sprintf(temp+21,"%02d",xfen);
+ 150   5                                                         write_string(7,1,temp+21);
+ 151   5                                                         write_com(0x80+0x48);
+ 152   5                                                         break;
+ 153   5                                              case 3:xshi++;
+ 154   5                                                         if (xshi>=24) 
+ 155   5                                                         xshi=0;                                        
+ 156   5                                                         sprintf(temp+24,"%02d",xshi);
+ 157   5                                                         write_string(4,1,temp+24);
+ 158   5                                                         write_com(0x80+0x45);
+ 159   5                                                         break;
+ 160   5                              case 4:z++;
+ 161   5                                                         if(z>=24)
+ 162   5                                                         z=0;
+ 163   5                                                         sprintf(temp+27,"%02d",z);
+ 164   5                                                         write_string(4,0,temp+27);
+ 165   5                                                         write_com(0x80+0x05);
+ 166   5                                                         break;
+ 167   5                                              case 5:y++;
+ 168   5                                                         if (y>=60) 
+ 169   5                                                         y=0;
+ 170   5                                                     sprintf(temp+30,"%02d",y);
+ 171   5                                                         write_string(7,0,temp+30);
+ 172   5                                                         write_com(0x80+0x08);
+ 173   5                                                         break;
+ 174   5                                              case 6:x++;     
+ 175   5                                                         if (x>=60) 
+ 176   5                                                         x=0;                                           
+ 177   5                                                 sprintf(temp+33,"%02d",x);
+ 178   5                                                 write_string(10,0,temp+33);
+C51 COMPILER V9.00   KEY                                                                   12/30/2014 22:19:31 PAGE 4   
+
+ 179   5                                                         write_com(0x80+0x0b);
+ 180   5                                                         break;               
+ 181   5                                  }
+ 182   4                              }       
+ 183   3                       }
+ 184   2              }
+ 185   1              if(key3==0)//时间减
+ 186   1              {
+ 187   2                      delayms(10);//消抖
+ 188   2                      if(key3==0)
+ 189   2                      {
+ 190   3      //                      jiao=0;
+ 191   3                              while(!key3);//等待松手
+ 192   3                              jiao=1;
+ 193   3                              if(key4num==0)
+ 194   3                              {
+ 195   4                                      switch (key1num)
+ 196   4                                      {
+ 197   5                                              case 1:miao--;
+ 198   5                                                         if (miao<0) 
+ 199   5                                                         miao=59; 
+ 200   5                                                         sprintf(temp,"%02d",miao);
+ 201   5                                                     write_string(10,1,temp);
+ 202   5                                                         write_com(0x80+0x4b);
+ 203   5                                                         break;
+ 204   5                                              case 2:fen--;
+ 205   5                                                         if (fen<0) 
+ 206   5                                                         fen=59;                                         
+ 207   5                                                         sprintf(temp+3,"%02d",fen);
+ 208   5                                                         write_string(7,1,temp+3);
+ 209   5                                                         write_com(0x80+0x48);
+ 210   5                                                         break;
+ 211   5                                              case 3:shi--;
+ 212   5                                                         if (shi<0) 
+ 213   5                                                         shi=23;                                        
+ 214   5                                                         sprintf(temp+6,"%02d",shi);
+ 215   5                                                         write_string(4,1,temp+6);
+ 216   5                                                         write_com(0x80+0x45);
+ 217   5                                                         break;
+ 218   5                                          case 4:nian--;
+ 219   5                                                         sprintf(temp+9,"%04d",nian);
+ 220   5                                                         write_string(2,0,temp+9);
+ 221   5                                                         write_com(0x80+0x05);
+ 222   5                                                         break;
+ 223   5                                              case 5:yue--;
+ 224   5                                                         if (yue<1) 
+ 225   5                                                         yue=12;                                         
+ 226   5                                                     sprintf(temp+12,"%02d",yue);
+ 227   5                                                         write_string(7,0,temp+12);
+ 228   5                                                         write_com(0x80+0x08);
+ 229   5                                                         break;
+ 230   5                                              case 6:if((nian%400==0)||(nian%4==0&&nian%100!=0))
+ 231   5                                                     {
+ 232   6                                                                      if(yue==2) xri=29;
+ 233   6                                                         }
+ 234   5                                                         else
+ 235   5                                                         {
+ 236   6                                                                  if(yue==2) xri=28;
+ 237   6                                                         }
+ 238   5                                                         if(yue==1||yue==3||yue==5||yue==7||yue==8||yue==10||yue==12) xri=31;
+ 239   5                                                         if(yue==4||yue==6||yue==9||yue==11) xri=30;
+ 240   5                                                         ri--;
+C51 COMPILER V9.00   KEY                                                                   12/30/2014 22:19:31 PAGE 5   
+
+ 241   5                                                         if (ri<1) 
+ 242   5                                                         ri=xri;                                        
+ 243   5                                                 sprintf(temp+15,"%02d",ri);
+ 244   5                                                 write_string(10,0,temp+15);
+ 245   5                                                         write_com(0x80+0x0b);
+ 246   5                                                         break;               
+ 247   5                                  }
+ 248   4                              }
+ 249   3                              if(key4num==1)
+ 250   3                              {
+ 251   4                                      switch (key1num)
+ 252   4                                      {
+ 253   5                                              case 1:xmiao--;
+ 254   5                                                         if (xmiao<0) 
+ 255   5                                                         xmiao=59; 
+ 256   5                                                         sprintf(temp+18,"%02d",xmiao);
+ 257   5                                                     write_string(10,1,temp+18);
+ 258   5                                                         write_com(0x80+0x4b);
+ 259   5                                                         break;
+ 260   5                                              case 2:xfen--;
+ 261   5                                                         if (xfen<0) 
+ 262   5                                                         xfen=59;                                        
+ 263   5                                                         sprintf(temp+21,"%02d",xfen);
+ 264   5                                                         write_string(7,1,temp+21);
+ 265   5                                                         write_com(0x80+0x48);
+ 266   5                                                         break;
+ 267   5                                              case 3:xshi--;
+ 268   5                                                         if (xshi<0) 
+ 269   5                                                         xshi=23;                                       
+ 270   5                                                         sprintf(temp+24,"%02d",xshi);
+ 271   5                                                         write_string(4,1,temp+24);
+ 272   5                                                         write_com(0x80+0x45);
+ 273   5                                                         break;
+ 274   5                              case 4:z--;
+ 275   5                                                         if(z<0)
+ 276   5                                                         z=23;
+ 277   5                                                         sprintf(temp+27,"%02d",z);
+ 278   5                                                         write_string(4,0,temp+27);
+ 279   5                                                         write_com(0x80+0x05);
+ 280   5                                                         break;
+ 281   5                                              case 5:y--;
+ 282   5                                                         if (y<0) 
+ 283   5                                                         y=59;
+ 284   5                                                     sprintf(temp+30,"%02d",y);
+ 285   5                                                         write_string(7,0,temp+30);
+ 286   5                                                         write_com(0x80+0x08);
+ 287   5                                                         break;
+ 288   5                                              case 6:x--;     
+ 289   5                                                         if (x<0) 
+ 290   5                                                         x=59;                                          
+ 291   5                                                 sprintf(temp+33,"%02d",x);
+ 292   5                                                 write_string(10,0,temp+33);
+ 293   5                                                         write_com(0x80+0x0b);
+ 294   5                                                         break;               
+ 295   5                                  }
+ 296   4                              }
+ 297   3                      }
+ 298   2              }
+ 299   1              if(key4num!=0)
+ 300   1                      flag++;
+ 301   1              else
+ 302   1                      flag=-1;                
+C51 COMPILER V9.00   KEY                                                                   12/30/2014 22:19:31 PAGE 6   
+
+ 303   1      }               
+ 304          
+ 305          
+ 306          
+ 307          
+ 308          
+ 309          
+ 310                           
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   2330    ----
+   CONSTANT SIZE    =     10    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     68    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

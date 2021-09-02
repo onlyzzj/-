@@ -1,0 +1,7 @@
+".\Output\delay.obj",
+".\Output\key.obj",
+".\Output\lcd1602.obj",
+".\Output\led.obj",
+".\Output\main.obj" 
+TO ".\Output\ ±÷”" 
+PRINT(".\List\ ±÷”.m51") RAMSIZE(256) 
